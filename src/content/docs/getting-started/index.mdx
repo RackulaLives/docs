@@ -3,39 +3,86 @@ title: Quick Start
 description: Get started with Rackula in under five minutes.
 ---
 
-import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid, Steps, Aside } from '@astrojs/starlight/components';
 
-Plan your homelab rack layout with Rackula. No account required, runs entirely in your browser.
+## What is Rackula?
+
+Rackula is a free, open-source rack layout designer for homelabbers. Plan your server rack layouts visually—no account required, runs entirely in your browser.
+
+**Key features:**
+- Drag-and-drop rack planning
+- 19 branded device packs (Dell, Ubiquiti, Synology, and more)
+- Export to PNG, SVG, PDF, or CSV
+- Share layouts via URL or QR code
+- Dark and light themes
+- Works offline after first load
+
+## Getting started
 
 <Steps>
 
 1. **Open Rackula**
 
-   Head to [count.racku.la](https://count.racku.la) — the app loads instantly.
+   Go to [count.racku.la](https://count.racku.la). The app loads instantly in your browser—no installation required.
 
 2. **Create your first rack**
 
-   Click **New Rack** and set your rack height in U (rack units). Standard sizes are 42U, 25U, or 12U.
+   Click **New Rack** in the toolbar. Set your rack height in U (rack units). Common sizes:
+   - **42U** — Full-height data centre rack
+   - **25U** — Half-height rack
+   - **12U** — Wall-mount or desktop rack
 
 3. **Add devices**
 
-   Drag devices from the library onto your rack. Resize them to match the U height of your actual gear.
+   Open the device library in the sidebar. Drag devices onto your rack and drop them at the desired U position.
 
-4. **Export your layout**
+4. **Customise your devices**
 
-   Export as PNG, SVG, or PDF for documentation or sharing.
+   Double-click any device to edit its name, category, and colour. Resize devices by dragging their edges.
+
+5. **Save your work**
+
+   Your layout auto-saves to browser storage. For backups, click **Export** and download as JSON, or use **Share** to generate a shareable URL.
 
 </Steps>
+
+<Aside type="tip">
+  Rackula stores your data locally in your browser. Export regularly to avoid losing work if you clear browser data.
+</Aside>
+
+## Understanding rack units
+
+A **rack unit (U)** is the standard unit of measurement for server rack equipment. One U equals 1.75 inches (44.45mm) in height.
+
+| Equipment | Typical height |
+|-----------|---------------|
+| 1U server | 1U |
+| Standard switch | 1U |
+| 2U server | 2U |
+| UPS | 2U–6U |
+| NAS | 1U–4U |
 
 ## Next steps
 
 <CardGrid>
   <Card title="First Rack Walkthrough" icon="rocket">
-    Step-by-step guide to creating your first rack layout.
-    [Read the guide →](/getting-started/first-rack/)
+    Step-by-step tutorial for building your first complete rack layout.
+
+    [Start the walkthrough →](/getting-started/first-rack/)
   </Card>
-  <Card title="Device Management" icon="laptop">
-    Learn how to add, edit, and organise devices.
+  <Card title="UI Overview" icon="laptop">
+    Learn the Rackula interface—toolbar, sidebar, canvas, and panels.
+
+    [Explore the UI →](/getting-started/ui-overview/)
+  </Card>
+  <Card title="Device Management" icon="seti:config">
+    Add, edit, and organise devices in your racks.
+
     [Manage devices →](/guides/devices/)
+  </Card>
+  <Card title="Keyboard Shortcuts" icon="seti:keyboard">
+    Work faster with keyboard shortcuts.
+
+    [View shortcuts →](/reference/shortcuts/)
   </Card>
 </CardGrid>

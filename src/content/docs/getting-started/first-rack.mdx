@@ -1,84 +1,241 @@
 ---
 title: First Rack Walkthrough
-description: Create your first rack layout from scratch.
+description: Create your first rack layout from scratch with this step-by-step tutorial.
 ---
 
-import { Steps, Aside } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-This guide walks through creating a complete rack layout from scratch. By the end, you'll have a documented rack ready to export.
+This tutorial walks you through creating a complete rack layout from scratch. By the end, you'll have a documented 42U rack with servers, networking, and power distribution.
 
 ## Before you start
 
 You'll need:
-- A web browser (Chrome, Firefox, Safari, or Edge)
-- Knowledge of your rack dimensions and equipment
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
+- Your rack dimensions and equipment list (optional but helpful)
 
 <Aside type="tip">
-  Measure your physical rack in U (rack units). One U equals 1.75 inches or 44.45mm.
+  **Not sure about your rack size?** Most full-height server racks are 42U. Wall-mount racks are typically 6U–12U. Measure your physical rack if you're documenting existing equipment.
 </Aside>
 
-## Creating the rack
+## Step 1: Create your rack
 
 <Steps>
 
 1. **Open Rackula**
 
-   Navigate to [count.racku.la](https://count.racku.la).
+   Navigate to [count.racku.la](https://count.racku.la). You'll see a welcome screen on your first visit.
 
-2. **Create a new rack**
+   {/* TODO: Screenshot of welcome screen */}
 
-   Click the **New Rack** button in the toolbar. Enter:
-   - **Name**: A label for your rack (e.g., "Main Server Rack")
-   - **Height**: The total U height (e.g., 42)
+2. **Click "New Rack"**
 
-3. **Configure rack settings**
+   Find the **New Rack** button in the toolbar at the top of the screen.
 
-   Optional: Set the rack width and depth if you need precise dimensions for your documentation.
+   {/* TODO: Screenshot highlighting New Rack button */}
+
+3. **Configure your rack**
+
+   In the dialog that appears, enter:
+
+   | Setting | Example value | Notes |
+   |---------|--------------|-------|
+   | **Name** | Main Server Rack | A label for your rack |
+   | **Height** | 42 | Total height in rack units |
+   | **Width** | 19" | Standard rack width |
+   | **Form factor** | 4-post | Most common type |
+
+4. **Click "Create"**
+
+   Your empty rack appears on the canvas, ready for devices.
+
+   {/* TODO: Screenshot of empty 42U rack */}
 
 </Steps>
 
-## Adding devices
+## Step 2: Add your first device
+
+Let's add a 2U server to the rack.
 
 <Steps>
 
 1. **Open the device library**
 
-   Click the **Devices** panel on the left sidebar.
+   Click the **Devices** button in the left sidebar, or press the sidebar toggle.
 
-2. **Select a device category**
+   {/* TODO: Screenshot of sidebar with device library */}
 
-   Choose from servers, networking, storage, power, or other categories.
+2. **Find a server**
 
-3. **Drag to position**
+   Use the search box to filter devices, or browse by category. Look for **2U Server** in the Server category.
 
-   Drag the device onto your rack. Drop it at the desired U position.
+3. **Drag to your rack**
 
-4. **Adjust size**
+   Click and drag the device from the library onto your rack. As you drag, you'll see position indicators showing where the device will land.
 
-   Resize the device by dragging its edges to match your actual equipment's U height.
+   {/* TODO: Screenshot of drag-and-drop in progress */}
 
-5. **Edit details**
+4. **Drop at position**
 
-   Double-click the device to edit its name, notes, and other properties.
+   Release the mouse button to place the device. The device snaps to the nearest valid U position.
 
 </Steps>
 
-## Exporting your layout
-
-Once your rack is complete:
-
-1. Click **Export** in the toolbar
-2. Choose your format:
-   - **PNG**: For documentation and sharing
-   - **SVG**: For scalable graphics and editing
-   - **PDF**: For printing and formal documentation
-
 <Aside>
-  Your rack data is stored locally in your browser. Consider exporting a backup regularly.
+  **Collision detection:** Rackula prevents devices from overlapping. If you try to drop a device where another exists, it will find the nearest valid position.
 </Aside>
 
-## What's next?
+## Step 3: Customise the device
 
-- [Device Management](/guides/devices/) — organise and customise your devices
-- [Rack Configuration](/guides/racks/) — advanced rack settings
-- [Keyboard Shortcuts](/reference/shortcuts/) — work faster with shortcuts
+<Steps>
+
+1. **Select the device**
+
+   Click on the device you just placed. It highlights to show it's selected.
+
+2. **Open the edit panel**
+
+   Double-click the device, or click the **Edit** button that appears when selected.
+
+3. **Update device details**
+
+   | Field | Example | Purpose |
+   |-------|---------|---------|
+   | **Name** | TrueNAS | Display name in rack view |
+   | **Category** | Storage | Determines default colour |
+   | **Notes** | 64GB RAM, 8x 4TB | Your documentation |
+
+4. **Change the colour (optional)**
+
+   Click the colour swatch to choose a custom colour, or leave it to use the category default.
+
+5. **Save changes**
+
+   Click **Save** or press Enter to apply your changes.
+
+</Steps>
+
+## Step 4: Build out your rack
+
+Now add more equipment. A typical homelab rack might include:
+
+### Networking (top of rack)
+
+| Position | Device | Notes |
+|----------|--------|-------|
+| U42 | Patch panel | Cable termination |
+| U41 | 24-port switch | Main network switch |
+| U40 | Firewall/router | pfSense, OPNsense, etc. |
+
+### Servers (middle)
+
+| Position | Device | Notes |
+|----------|--------|-------|
+| U35–36 | 2U server | Hypervisor |
+| U33–34 | 2U server | NAS |
+| U31–32 | 2U server | Backup |
+
+### Power (bottom)
+
+| Position | Device | Notes |
+|----------|--------|-------|
+| U1–2 | UPS | Battery backup |
+| U3 | PDU | Power distribution |
+
+<Aside type="tip">
+  **Hot aisle/cold aisle:** Place intake fans (front) facing the cold aisle. Server exhaust should face the hot aisle. Use blanking panels to prevent hot air recirculation.
+</Aside>
+
+## Step 5: Switch views
+
+Rackula supports both front and rear rack views.
+
+<Tabs>
+  <TabItem label="Front view">
+    Shows devices as seen from the front of the rack. This is the default view.
+
+    - Device fronts and fascias
+    - U position labels
+    - Device names
+  </TabItem>
+  <TabItem label="Rear view">
+    Shows devices as seen from the back of the rack.
+
+    - Cable management
+    - Power connections
+    - Rear-mounted equipment
+
+    Click the **Front/Rear** toggle in the toolbar to switch views.
+  </TabItem>
+</Tabs>
+
+## Step 6: Export your layout
+
+Once your rack is complete, export it for documentation.
+
+<Steps>
+
+1. **Click "Export"**
+
+   Find the Export button in the toolbar.
+
+2. **Choose your format**
+
+   | Format | Best for |
+   |--------|----------|
+   | **PNG** | Documentation, sharing, presentations |
+   | **SVG** | Scalable graphics, editing in design tools |
+   | **PDF** | Printing, formal documentation |
+   | **CSV** | Spreadsheet import, inventory tracking |
+
+3. **Configure options**
+
+   - **Background:** Dark, light, or transparent
+   - **Include legend:** Adds a colour key for device categories
+   - **Include QR code:** Adds a scannable link to your layout
+
+4. **Download**
+
+   Click **Export** to download your file.
+
+</Steps>
+
+## Step 7: Save and share
+
+### Auto-save
+
+Rackula automatically saves your work to browser localStorage. Your layout persists across browser sessions.
+
+### Manual backup
+
+For reliable backups, export your layout as JSON:
+1. Click **Export**
+2. Select **JSON** format
+3. Save the file somewhere safe
+
+### Share with others
+
+Generate a shareable link:
+1. Click **Share** in the toolbar
+2. Copy the generated URL
+3. Anyone with the link can view your layout
+
+<Aside type="caution">
+  **Browser storage warning:** Clearing your browser data will delete your saved layouts. Always keep JSON backups of important work.
+</Aside>
+
+## What you've learned
+
+In this tutorial, you:
+- Created a new rack with custom dimensions
+- Added and positioned devices using drag-and-drop
+- Customised device names, categories, and colours
+- Switched between front and rear views
+- Exported your layout in multiple formats
+- Saved and shared your work
+
+## Next steps
+
+- [Device Management](/guides/devices/) — Advanced device customisation
+- [Rack Configuration](/guides/racks/) — Multiple racks, form factors, and settings
+- [Import/Export](/guides/export/) — Backup, restore, and share layouts
+- [Keyboard Shortcuts](/reference/shortcuts/) — Speed up your workflow
