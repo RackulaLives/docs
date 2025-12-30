@@ -3,13 +3,53 @@ title: Device Management
 description: Add, edit, and organise devices in your rack layouts.
 ---
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
-Devices are the building blocks of your rack layout. This guide covers everything from adding basic devices to creating custom device templates.
+Devices are the building blocks of your rack layout. This guide covers everything from adding basic devices to creating custom device templates with advanced metadata.
+
+## Device library
+
+The device library contains all available devices for your rack layouts.
+
+### Built-in devices
+
+Rackula includes a starter library with 43 generic devices organised into [12 categories](/concepts/device-categories/):
+
+- Servers (1U, 2U, 4U)
+- Network equipment
+- Storage devices
+- Power distribution
+- And more...
+
+### Searching and filtering
+
+1. Open the **Devices** panel in the left sidebar
+2. Type in the search box to filter by name or model
+3. Press **Enter** to select the first match
+4. Use keyboard arrows to navigate results
+
+{/* TODO: Screenshot of device palette with search */}
+
+<Aside type="tip">
+  Devices are grouped by category. Expand/collapse groups by clicking the category header.
+</Aside>
+
+### Drag-and-drop placement
+
+<Steps>
+
+1. Find a device in the library
+2. Click and drag the device toward your rack
+3. Position indicators show valid drop locations
+4. Release to place the device
+
+</Steps>
+
+The device snaps to the nearest valid U position. Invalid positions (collisions) are highlighted.
 
 ## Adding devices
 
-### From the device library
+### From the library
 
 1. Open the **Devices** panel in the left sidebar
 2. Browse or search for a device
@@ -21,69 +61,307 @@ Double-click an empty U slot in your rack to create a blank device at that posit
 
 ## Device properties
 
-Each device has the following properties:
+### Basic properties
 
 | Property | Description |
 |----------|-------------|
 | **Name** | Display label for the device |
-| **Category** | Type classification (server, network, storage, etc.) |
-| **Height** | Size in rack units (U) |
-| **Notes** | Additional information or documentation |
-| **Colour** | Visual colour in the rack view |
+| **Model** | Model number or identifier |
+| **Manufacturer** | Device manufacturer |
+| **Category** | Type classification (determines default colour) |
+| **Notes** | Documentation and comments |
 
-<Aside type="tip">
-  Device colours are automatically assigned based on category. You can override this per device.
+### Physical properties
+
+| Property | Description |
+|----------|-------------|
+| **U height** | Size in rack units (0.5U–100U) |
+| **Weight** | Device weight with unit (kg or lb) |
+| **Full-depth** | Toggle for full-depth vs half-depth devices |
+
+### Appearance
+
+| Property | Description |
+|----------|-------------|
+| **Colour** | Custom colour (overrides category default) |
+| **Front image** | Custom device image for front view |
+| **Rear image** | Custom device image for rear view |
+
+### Device face
+
+The **device face** determines where the device appears in front/rear views:
+
+| Face | Front view | Rear view | Use for |
+|------|------------|-----------|---------|
+| **Front** | Visible | Hidden | Standard servers, switches |
+| **Rear** | Hidden | Visible | Rear-mount only equipment |
+| **Both** | Visible | Visible | Full-depth equipment |
+
+<Aside>
+  Half-depth devices with face set to "Front" or "Rear" allow another half-depth device to occupy the opposite face at the same U position.
 </Aside>
 
-## Device categories
+### Airflow
 
-Rackula uses categories to organise devices and apply consistent styling:
+Set the device's airflow direction for thermal planning:
 
-| Category | Colour | Use for |
-|----------|--------|---------|
-| Server | Cyan | Compute nodes, hypervisors, NAS |
-| Network | Purple | Switches, routers, firewalls |
-| Storage | Green | Disk shelves, SAN arrays |
-| Power | Red | PDUs, UPS, power strips |
-| KVM | Orange | Console servers, KVM switches |
-| AV/Media | Pink | Media servers, streaming devices |
-| Cooling | Yellow | Fans, blanking panels with vents |
-| Shelf | Grey | Shelves, drawers |
-| Blank | Dark grey | Blanking panels, spacers |
+| Direction | Description |
+|-----------|-------------|
+| **Passive** | No active cooling |
+| **Front-to-rear** | Standard server airflow |
+| **Rear-to-front** | Some network equipment |
+| **Left-to-right** | Side intake |
+| **Right-to-left** | Side intake (opposite) |
+| **Side-to-rear** | Some 1U switches |
+| **Mixed** | Complex internal airflow |
+
+See [Airflow & Cooling](/concepts/airflow/) for thermal management guidance.
+
+## Advanced device metadata
+
+For detailed documentation, Rackula supports advanced device metadata.
+
+### Network interfaces
+
+Document network ports on the device:
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Interface label (e.g., "eth0", "MGMT") |
+| **Type** | Interface type (1GbE, 10GbE, 25GbE, etc.) |
+| **Management** | Flag for management-only ports |
+
+### Power ports (input)
+
+Document power connections:
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Port label (e.g., "PSU1", "PSU2") |
+| **Max draw** | Maximum power draw in watts |
+| **Allocated** | Allocated/planned power in watts |
+
+### Power outlets (output)
+
+For PDUs and UPS devices:
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Outlet label |
+| **Feed leg** | For three-phase power (L1, L2, L3) |
+
+### Device bays
+
+For blade chassis and modular devices:
+
+| Field | Description |
+|-------|-------------|
+| **Bay number** | Slot position |
+| **Installed device** | What's installed in the bay |
+| **Status** | Empty, occupied, reserved |
+
+### Inventory items
+
+Track internal components:
+
+| Field | Description |
+|-------|-------------|
+| **Component** | Component type (RAM, CPU, HDD, etc.) |
+| **Quantity** | Number installed |
+| **Description** | Details (e.g., "64GB DDR4 ECC") |
+
+### Other fields
+
+| Field | Description |
+|-------|-------------|
+| **Part number** | SKU or part number |
+| **Serial number** | Device serial |
+| **Asset tag** | Internal asset tracking |
+| **External links** | URLs to documentation, vendor pages |
+| **Custom fields** | User-defined key-value pairs |
+
+## Creating custom devices
+
+<Steps>
+
+1. **Open device library**
+
+   Click the device library button or use the sidebar.
+
+2. **Click "Add Device"**
+
+   Find the add button at the bottom of the library.
+
+3. **Enter basic details**
+
+   - Name (required)
+   - Model and manufacturer
+   - Category
+
+4. **Set dimensions**
+
+   - U height (0.5U increments supported)
+   - Full-depth toggle
+
+5. **Add images (optional)**
+
+   Upload front and/or rear images for visual representation.
+
+6. **Save device**
+
+   The device appears in your library, ready for placement.
+
+</Steps>
+
+<Aside type="tip">
+  **Image guidelines:** Use PNG or JPEG images. Ideal dimensions match the device's U height ratio. Transparent backgrounds work best for non-rectangular equipment.
+</Aside>
+
+## Device images
+
+### Bundled images
+
+Rackula includes images for many devices in brand packs. These show automatically when you use devices from brand packs.
+
+### Custom images per device type
+
+When creating a custom device, you can add default front and rear images that apply to all placements.
+
+### Image override per placement
+
+Override images for specific placements:
+
+1. Select the placed device
+2. Open the edit panel
+3. Scroll to the Images section
+4. Upload a custom image
+
+This is useful when the same device type has visual variations (different faceplates, labels, etc.).
+
+### Image indicators
+
+In the device library, icons indicate image availability:
+
+| Icon | Meaning |
+|------|---------|
+| 📷 | Front image available |
+| 📷📷 | Front and rear images |
+| — | No images (placeholder shown) |
 
 ## Editing devices
 
 ### Single device
 
-Double-click a device to open the edit dialog. Make your changes and click **Save**.
+<Steps>
 
-### Bulk editing
+1. **Select the device**
 
-1. Select multiple devices by holding <kbd>Shift</kbd> and clicking
-2. Right-click to open the context menu
-3. Choose **Edit Selected**
+   Click on the device in your rack.
 
-## Moving and resizing
+2. **Open edit panel**
 
-### Moving
+   Double-click, or click **Edit** in the toolbar.
 
-- **Drag**: Click and drag a device to reposition
-- **Keyboard**: Select a device and use arrow keys to nudge
+3. **Make changes**
 
-### Resizing
+   Update any properties.
 
-- **Drag edges**: Hover over the top or bottom edge and drag
-- **Properties**: Edit the height value in device properties
+4. **Save**
 
-<Aside type="caution">
-  Devices cannot overlap. Rackula will prevent moves that would cause collisions.
+   Click **Save** or press **Enter**.
+
+</Steps>
+
+### Multi-device selection
+
+1. Hold <kbd>Shift</kbd> and click additional devices
+2. Or drag a selection box around multiple devices
+3. Selected devices highlight together
+4. Edit applies to all selected devices
+
+## Moving devices
+
+### Drag to move
+
+Click and drag a device to reposition within the rack. Position indicators show valid drop locations.
+
+### Keyboard movement
+
+Select a device and use:
+
+| Key | Action |
+|-----|--------|
+| <kbd>↑</kbd> | Move up 1U |
+| <kbd>↓</kbd> | Move down 1U |
+
+### Leapfrog behaviour
+
+When moving with keyboard, devices **leapfrog** over obstacles:
+
+- If the target position is blocked, the device jumps to the next available position
+- This prevents devices from getting stuck behind others
+- Movement stops at rack boundaries
+
+<Aside>
+  Leapfrog makes keyboard navigation faster—you don't need to manually navigate around obstacles.
 </Aside>
+
+### Collision detection
+
+Rackula prevents device overlap:
+
+- Invalid positions are highlighted during drag
+- Drops are rejected if they would cause collisions
+- Consider device face (front/rear/both) when planning
+- Half-depth devices can share U positions with opposite-face devices
+
+## Copying and duplicating
+
+### Duplicate device
+
+1. Select a device
+2. Press <kbd>Ctrl</kbd>+<kbd>D</kbd> (or <kbd>Cmd</kbd>+<kbd>D</kbd> on Mac)
+3. The duplicate appears offset from the original
+4. Drag to final position
+
+### Copy between racks
+
+1. Select device(s)
+2. Switch to target rack (tabs or sidebar)
+3. Paste with <kbd>Ctrl</kbd>+<kbd>V</kbd>
 
 ## Deleting devices
 
-Select a device and press <kbd>Delete</kbd> or <kbd>Backspace</kbd>. Alternatively, right-click and choose **Delete**.
+| Method | Action |
+|--------|--------|
+| Keyboard | Select and press <kbd>Delete</kbd> or <kbd>Backspace</kbd> |
+| Context menu | Right-click → Delete |
+| Edit panel | Click Delete button |
 
-## Next steps
+<Aside type="tip">
+  All deletions can be undone with <kbd>Ctrl</kbd>+<kbd>Z</kbd>.
+</Aside>
 
-- [Rack Configuration](/guides/racks/) — configure rack properties
-- [Import/Export](/guides/export/) — share and backup your layouts
+## Undo and redo
+
+Device operations support full undo/redo:
+
+| Shortcut | Action |
+|----------|--------|
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> | Undo last action |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Redo |
+| <kbd>Ctrl</kbd>+<kbd>Y</kbd> | Redo (alternative) |
+
+Undoable operations include:
+- Place device
+- Move device
+- Remove device
+- Update device properties
+- Update device face or name
+
+## Related guides
+
+- [Device Categories](/concepts/device-categories/) — Understanding device types
+- [Brand Device Packs](/reference/brand-packs/) — Pre-configured device templates
+- [Rack Configuration](/guides/racks/) — Configure rack properties
+- [Import/Export](/guides/export/) — Share and backup layouts
