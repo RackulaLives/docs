@@ -1,55 +1,69 @@
 ---
 title: Rackula Documentation
-description: Plan your homelab rack layout. FOSS rack layout designer for homelabbers.
+description: Documentation for Rackula, a FOSS rack layout designer for homelabbers.
 template: splash
 hero:
-  tagline: Plan your homelab rack layout. Visualise, organise, and document your server racks.
+  tagline: Documentation for the FOSS rack layout designer.
   image:
     file: ../../assets/logo-dark.svg
   actions:
     - text: Get Started
       link: /getting-started/
       icon: right-arrow
-    - text: Try Rackula
+    - text: Open Rackula
       link: https://count.racku.la
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## Features
-
-<CardGrid stagger>
-  <Card title="Drag and Drop" icon="pencil">
-    Build rack layouts visually. Drag devices, resize, and rearrange with ease.
-  </Card>
-  <Card title="Multiple Racks" icon="document">
-    Plan entire data centre floors. Support for unlimited racks in a single project.
-  </Card>
-  <Card title="Export Anywhere" icon="add-document">
-    Export as PNG, SVG, or PDF. Perfect for documentation and sharing.
-  </Card>
-  <Card title="Self-Host" icon="setting">
-    Run on your own infrastructure. Docker image available, no external dependencies.
-  </Card>
-  <Card title="Privacy First" icon="approve-check">
-    All data stays in your browser. No accounts, no tracking, no cloud storage.
-  </Card>
-  <Card title="Open Source" icon="github">
-    MIT licensed. Contribute, fork, or audit the code on [GitHub](https://github.com/RackulaLives/Rackula).
-  </Card>
-</CardGrid>
-
-## Quick links
+## Where to start
 
 <CardGrid>
-  <Card title="Quick Start" icon="rocket">
-    Up and running in under five minutes.
-    [Get started →](/getting-started/)
-  </Card>
-  <Card title="Self-Hosting" icon="laptop">
-    Deploy Rackula on your own infrastructure.
-    [Docker guide →](/self-hosting/docker/)
-  </Card>
+  <LinkCard
+    title="Quick Start"
+    description="Create your first rack layout in five minutes."
+    href="/getting-started/"
+  />
+  <LinkCard
+    title="First Rack Walkthrough"
+    description="Step-by-step guide to building a complete layout."
+    href="/getting-started/first-rack/"
+  />
+</CardGrid>
+
+## Guides
+
+<CardGrid>
+  <LinkCard
+    title="Device Management"
+    description="Add, edit, and organise devices in your racks."
+    href="/guides/devices/"
+  />
+  <LinkCard
+    title="Rack Configuration"
+    description="Configure rack properties and display options."
+    href="/guides/racks/"
+  />
+  <LinkCard
+    title="Import/Export"
+    description="Save, share, and backup your layouts."
+    href="/guides/export/"
+  />
+</CardGrid>
+
+## Reference
+
+<CardGrid>
+  <LinkCard
+    title="Keyboard Shortcuts"
+    description="Complete list of keyboard shortcuts."
+    href="/reference/shortcuts/"
+  />
+  <LinkCard
+    title="Self-Hosting"
+    description="Run Rackula on your own infrastructure."
+    href="/self-hosting/docker/"
+  />
 </CardGrid>
