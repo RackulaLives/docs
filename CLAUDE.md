@@ -1,28 +1,33 @@
-# Rackula Marketing Site (www.racku.la)
+# Rackula Documentation (docs.racku.la)
 
-Marketing homepage for Rackula — a FOSS rack layout designer for homelabbers.
+Documentation site for Rackula — a FOSS rack layout designer for homelabbers.
 
 ## Quick Links
 
+- **Live docs**: https://docs.racku.la
 - **Live app**: https://count.racku.la
+- **Marketing site**: https://www.racku.la
 - **GitHub**: https://github.com/RackulaLives/Rackula
 - **Brand guide**: `/Users/gvns/notes/gVault/01-PROJECTS/rackula/brand-guide.md`
 
 ## Stack
 
-- Astro 5.x (static site)
-- No CSS framework — use Dracula colour tokens from brand guide
-- No client-side JS unless necessary
+- Astro 5.x with Starlight
+- Custom CSS for Dracula/Alucard theming
+- Pagefind for search
 
 ## Project Structure
 
 ```
 src/
-  pages/       # Astro pages (file-based routing)
-  components/  # Reusable .astro components
-  layouts/     # Page layouts (create as needed)
-  styles/      # Global CSS with Dracula tokens
-public/        # Static assets (favicon, images, og images)
+  content/docs/     # Documentation pages (MDX)
+    getting-started/
+    guides/
+    reference/
+    self-hosting/
+  assets/           # Logo SVGs for Starlight
+  styles/           # Custom theme CSS (dracula.css)
+public/             # Static assets (favicon)
 ```
 
 ## Commands
@@ -33,36 +38,13 @@ npm run build    # Production build
 npm run preview  # Preview production build
 ```
 
-## Brand Essentials
+## Content Guidelines
 
-### Colours (Dracula Dark — default)
+### Writing Style
 
-| Token | Hex | Use |
-|-------|-----|-----|
-| `--colour-bg-primary` | `#282A36` | Page background |
-| `--colour-text-primary` | `#F8F8F2` | Body text |
-| `--colour-purple` | `#BD93F9` | Brand primary, links |
-| `--colour-cyan` | `#8BE9FD` | CTAs, interactive |
-| `--colour-pink` | `#FF79C6` | Accent |
-
-Light mode (Alucard) uses `[data-theme="light"]` — see brand guide for full palette.
-
-### Typography
-
-- **Lockup/Brand**: `'Space Grotesk'` (`--font-display`) — for "Rackula" wordmark and hero titles
-- **Headings**: `'JetBrains Mono', monospace` — semibold
-- **Body**: `'Inter', system-ui, sans-serif` — regular
-- **Code/UI**: `'JetBrains Mono', monospace`
-
-### Voice
-
-- Direct, no marketing fluff
-- Technical — assume competence
+- Direct, technical, assume competence
 - Dry wit, vampire puns encouraged
-
-Examples:
-- Good: "Plan your homelab rack layout."
-- Bad: "The ultimate solution for all your rack planning needs!"
+- Focus on practical how-to content
 
 ### Spelling
 
@@ -73,75 +55,75 @@ Use **Canadian/British spelling** throughout:
 - centre (not center)
 - behaviour (not behavior)
 
-## SEO Requirements
+### MDX Components
 
-Every page needs:
-- Unique `<title>` with "Rackula" brand
-- `<meta name="description">` (150-160 chars)
-- Open Graph tags (`og:title`, `og:description`, `og:image`)
-- Canonical URL
+Starlight provides built-in components:
 
-## Conventions
+```mdx
+import { Card, CardGrid, Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
-- Use Astro Image component for all images
-- Prefer CSS custom properties from brand guide
-- Mobile-first responsive design
-- Support dark (default) and light themes
-- No external analytics scripts (we use self-hosted Umami at t.racku.la)
+<Steps>
+1. First step
+2. Second step
+</Steps>
 
-## Logo & Lockup
+<Aside type="tip">
+  Helpful tip here.
+</Aside>
 
-### The Mark
-
-Sharp-cornered rectangle with three horizontal slots (server rack abstraction). Geismar-style geometric minimalism.
-
-| Variant | Use Case | Colour |
-|---------|----------|--------|
-| Solid purple | Favicon, UI icon | `#BD93F9` (dark) / `#644AC9` (light) |
-| Gradient | Marketing, hero (64px+) | Purple → Pink → Cyan diagonal |
-
-### Logo Lockup
-
-Mark + wordmark combination for headers, marketing, and documentation.
-
-**Specifications:**
-- Wordmark font: Space Grotesk, weight 500-600
-- Spacing: 12px gap between mark and wordmark
-- Alignment: Vertically centred
-
-**Variants:**
-
-| File | Use Case |
-|------|----------|
-| `rackula-lockup.png` | Static, dark backgrounds |
-| `rackula-lockup-light.png` | Static, light backgrounds |
-| `rackula-lockup-staggered-dark.svg` | Animated (SMIL), dark mode |
-| `rackula-lockup-staggered-light.svg` | Animated (SMIL), light mode |
-
-### Animated Lockup
-
-For contexts supporting SMIL animation (GitHub README, marketing). Each slot pulses independently with staggered timing.
-
-- Animation: 4s cycle, 0.5s stagger between slots
-- Slot colours (top → bottom): Cyan, Green, Pink
-- Frame/wordmark: Static purple
-
-### Gradient Definitions
-
-**Dark (Dracula):**
-```svg
-<linearGradient id="dracula-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-  <stop offset="0%" stop-color="#BD93F9"/>
-  <stop offset="50%" stop-color="#FF79C6"/>
-  <stop offset="100%" stop-color="#8BE9FD"/>
-</linearGradient>
+<Tabs>
+  <TabItem label="Option A">Content A</TabItem>
+  <TabItem label="Option B">Content B</TabItem>
+</Tabs>
 ```
 
-**Light (Alucard):**
-```svg
-<linearGradient id="alucard-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-  <stop offset="0%" stop-color="#644AC9"/>
-  <stop offset="50%" stop-color="#A3144D"/>
-  <stop offset="100%" stop-color="#036A96"/>
-</linearGradient>
+## Theming
+
+Custom theme in `src/styles/dracula.css` overrides Starlight CSS variables:
+
+### Dracula (Dark — default)
+
+| Token | Hex | Use |
+|-------|-----|-----|
+| `--sl-color-bg` | `#282A36` | Page background |
+| `--sl-color-text` | `#F8F8F2` | Body text |
+| `--sl-color-accent` | `#BD93F9` | Links, highlights |
+
+### Alucard (Light)
+
+| Token | Hex | Use |
+|-------|-----|-----|
+| `--sl-color-bg` | `#FFFBEB` | Page background |
+| `--sl-color-text` | `#1F1F1F` | Body text |
+| `--sl-color-accent` | `#644AC9` | Links, highlights |
+
+### Typography
+
+- **Headings**: JetBrains Mono, semibold
+- **Body**: Inter, regular
+- **Code**: JetBrains Mono
+
+## Adding New Pages
+
+1. Create MDX file in appropriate directory under `src/content/docs/`
+2. Add frontmatter with `title` and `description`
+3. Sidebar auto-generates from directory structure
+
+Example:
+
+```mdx
+---
+title: Page Title
+description: Brief description for SEO and previews.
+---
+
+Content here...
+```
+
+## Deployment
+
+GitHub Actions workflow (`.github/workflows/deploy.yml`) deploys to self-hosted runner on push to main:
+
+```
+npm ci → npm run build → rsync to /var/www/docs.racku.la/
 ```
