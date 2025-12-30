@@ -1,0 +1,63 @@
+---
+title: Device Brand Packs
+description: Pre-configured device templates for popular hardware brands.
+---
+
+import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Brand packs provide pre-configured device templates with accurate dimensions and styling for popular hardware manufacturers.
+
+## Available brand packs
+
+<CardGrid>
+  <Card title="Coming Soon" icon="rocket">
+    Brand packs are planned for a future release. For now, create custom devices manually.
+  </Card>
+</CardGrid>
+
+## Planned brands
+
+The following brand packs are planned:
+
+### Servers
+- Dell PowerEdge
+- HPE ProLiant
+- Supermicro
+- Lenovo ThinkSystem
+
+### Networking
+- Ubiquiti UniFi
+- Cisco
+- MikroTik
+- Netgear
+
+### Storage
+- Synology
+- QNAP
+- TrueNAS
+
+### Power
+- APC
+- CyberPower
+- Tripp Lite
+
+## Creating custom devices
+
+Until brand packs are available, create devices manually:
+
+1. Add a blank device to your rack
+2. Set the correct U height
+3. Name the device (e.g., "Dell R730")
+4. Add notes with model details
+
+<Aside type="tip">
+  Custom devices can be saved as templates for reuse across multiple racks.
+</Aside>
+
+## Contributing brand packs
+
+Brand packs will be open-source and community-contributed. Watch the [GitHub repository](https://github.com/RackulaLives/Rackula) for updates on contributing guidelines.
+
+## Accuracy disclaimer
+
+Brand pack dimensions are provided as-is based on publicly available specifications. Always verify against your actual hardware before making purchasing or installation decisions.

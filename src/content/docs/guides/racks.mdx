@@ -1,0 +1,84 @@
+---
+title: Rack Configuration
+description: Configure rack properties, dimensions, and display options.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Racks are containers for your devices. This guide covers rack creation, configuration, and management.
+
+## Creating a rack
+
+1. Click **New Rack** in the toolbar
+2. Enter a name for your rack
+3. Set the height in rack units (U)
+4. Click **Create**
+
+### Common rack sizes
+
+| Size | Use case |
+|------|----------|
+| 42U | Full-height data centre rack |
+| 25U | Half-height or open frame rack |
+| 12U | Small wall-mount or desktop rack |
+| 4U | Mini rack or portable enclosure |
+
+## Rack properties
+
+### Basic settings
+
+| Property | Description |
+|----------|-------------|
+| **Name** | Display label for the rack |
+| **Height** | Total height in rack units |
+| **Starting U** | First U number (usually 1) |
+| **Numbering** | Top-down or bottom-up |
+
+### Display options
+
+| Option | Description |
+|--------|-------------|
+| **Show U numbers** | Display U position labels |
+| **Show grid** | Display grid lines between U positions |
+| **Show device names** | Display device labels in rack view |
+
+<Aside type="tip">
+  Most racks number from the bottom up (U1 at the bottom). Some data centres use top-down numbering.
+</Aside>
+
+## Multiple racks
+
+Rackula supports multiple racks in a single project. This is useful for:
+
+- Multi-rack deployments
+- Before/after comparisons
+- Planning migrations
+
+### Adding additional racks
+
+Click **New Rack** to add another rack to your project. Each rack is independent and can have different heights and settings.
+
+### Rack arrangement
+
+Drag rack tabs to reorder them in the tab bar. The display order affects how racks appear in exports.
+
+## Renaming and deleting
+
+### Rename
+
+Double-click the rack tab or open rack settings and edit the name.
+
+### Delete
+
+1. Right-click the rack tab
+2. Select **Delete Rack**
+3. Confirm the deletion
+
+<Aside type="caution">
+  Deleting a rack removes all devices in that rack. This cannot be undone.
+</Aside>
+
+## Next steps
+
+- [Device Management](/guides/devices/) — add devices to your rack
+- [Import/Export](/guides/export/) — save and share your layouts

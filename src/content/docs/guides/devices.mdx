@@ -1,0 +1,89 @@
+---
+title: Device Management
+description: Add, edit, and organise devices in your rack layouts.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Devices are the building blocks of your rack layout. This guide covers everything from adding basic devices to creating custom device templates.
+
+## Adding devices
+
+### From the device library
+
+1. Open the **Devices** panel in the left sidebar
+2. Browse or search for a device
+3. Drag the device onto your rack
+
+### Quick add
+
+Double-click an empty U slot in your rack to create a blank device at that position.
+
+## Device properties
+
+Each device has the following properties:
+
+| Property | Description |
+|----------|-------------|
+| **Name** | Display label for the device |
+| **Category** | Type classification (server, network, storage, etc.) |
+| **Height** | Size in rack units (U) |
+| **Notes** | Additional information or documentation |
+| **Colour** | Visual colour in the rack view |
+
+<Aside type="tip">
+  Device colours are automatically assigned based on category. You can override this per device.
+</Aside>
+
+## Device categories
+
+Rackula uses categories to organise devices and apply consistent styling:
+
+| Category | Colour | Use for |
+|----------|--------|---------|
+| Server | Cyan | Compute nodes, hypervisors, NAS |
+| Network | Purple | Switches, routers, firewalls |
+| Storage | Green | Disk shelves, SAN arrays |
+| Power | Red | PDUs, UPS, power strips |
+| KVM | Orange | Console servers, KVM switches |
+| AV/Media | Pink | Media servers, streaming devices |
+| Cooling | Yellow | Fans, blanking panels with vents |
+| Shelf | Grey | Shelves, drawers |
+| Blank | Dark grey | Blanking panels, spacers |
+
+## Editing devices
+
+### Single device
+
+Double-click a device to open the edit dialog. Make your changes and click **Save**.
+
+### Bulk editing
+
+1. Select multiple devices by holding <kbd>Shift</kbd> and clicking
+2. Right-click to open the context menu
+3. Choose **Edit Selected**
+
+## Moving and resizing
+
+### Moving
+
+- **Drag**: Click and drag a device to reposition
+- **Keyboard**: Select a device and use arrow keys to nudge
+
+### Resizing
+
+- **Drag edges**: Hover over the top or bottom edge and drag
+- **Properties**: Edit the height value in device properties
+
+<Aside type="caution">
+  Devices cannot overlap. Rackula will prevent moves that would cause collisions.
+</Aside>
+
+## Deleting devices
+
+Select a device and press <kbd>Delete</kbd> or <kbd>Backspace</kbd>. Alternatively, right-click and choose **Delete**.
+
+## Next steps
+
+- [Rack Configuration](/guides/racks/) — configure rack properties
+- [Import/Export](/guides/export/) — share and backup your layouts

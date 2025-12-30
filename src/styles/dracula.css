@@ -1,0 +1,270 @@
+/*
+ * Rackula Docs - Dracula/Alucard Theme
+ * Based on: https://draculatheme.com/spec
+ * Brand guide: /Users/gvns/notes/gVault/01-PROJECTS/rackula/brand-guide.md
+ */
+
+/* ============================================
+   Font Loading
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500&display=swap');
+
+/* ============================================
+   Dracula (Dark Mode) - Default
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --sl-color-bg: #282A36;
+  --sl-color-bg-nav: #21222C;
+  --sl-color-bg-sidebar: #21222C;
+  --sl-color-bg-inline-code: #44475A;
+
+  /* Text */
+  --sl-color-text: #F8F8F2;
+  --sl-color-text-accent: #BD93F9;
+
+  /* Accent colours */
+  --sl-color-accent: #BD93F9;
+  --sl-color-accent-low: rgba(189, 147, 249, 0.2);
+  --sl-color-accent-high: #BD93F9;
+
+  /* Links */
+  --sl-color-white: #F8F8F2;
+  --sl-color-gray-1: #F8F8F2;
+  --sl-color-gray-2: #E0E0E0;
+  --sl-color-gray-3: #BFBFBF;
+  --sl-color-gray-4: #6272A4;
+  --sl-color-gray-5: #44475A;
+  --sl-color-gray-6: #343746;
+  --sl-color-black: #191A21;
+
+  /* Semantic colours */
+  --sl-color-green: #50FA7B;
+  --sl-color-orange: #FFB86C;
+  --sl-color-red: #FF5555;
+  --sl-color-blue: #8BE9FD;
+  --sl-color-purple: #BD93F9;
+
+  /* Hairline/borders */
+  --sl-color-hairline: #44475A;
+  --sl-color-hairline-light: #343746;
+
+  /* Typography */
+  --sl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sl-font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
+
+  /* Headings use JetBrains Mono */
+  --sl-font-system-mono: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   Alucard (Light Mode)
+   ============================================ */
+
+:root[data-theme='light'] {
+  /* Backgrounds - warm cream tones */
+  --sl-color-bg: #FFFBEB;
+  --sl-color-bg-nav: #EFEDDC;
+  --sl-color-bg-sidebar: #EFEDDC;
+  --sl-color-bg-inline-code: #DEDCCF;
+
+  /* Text */
+  --sl-color-text: #1F1F1F;
+  --sl-color-text-accent: #644AC9;
+
+  /* Accent colours */
+  --sl-color-accent: #644AC9;
+  --sl-color-accent-low: rgba(100, 74, 201, 0.15);
+  --sl-color-accent-high: #644AC9;
+
+  /* Grays for light mode */
+  --sl-color-white: #FFFBEB;
+  --sl-color-gray-1: #1F1F1F;
+  --sl-color-gray-2: #3A3A3A;
+  --sl-color-gray-3: #5A5A5A;
+  --sl-color-gray-4: #6C664B;
+  --sl-color-gray-5: #CFCFDE;
+  --sl-color-gray-6: #DEDCCF;
+  --sl-color-black: #1F1F1F;
+
+  /* Semantic colours - darker for light background contrast */
+  --sl-color-green: #14710A;
+  --sl-color-orange: #A34D14;
+  --sl-color-red: #CB3A2A;
+  --sl-color-blue: #036A96;
+  --sl-color-purple: #644AC9;
+
+  /* Hairline/borders */
+  --sl-color-hairline: #CFCFDE;
+  --sl-color-hairline-light: #DEDCCF;
+}
+
+/* ============================================
+   Typography Overrides
+   ============================================ */
+
+/* Headings use JetBrains Mono, semibold */
+h1, h2, h3, h4, h5, h6,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+/* Site title uses Space Grotesk */
+.site-title {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-weight: 500;
+}
+
+/* Code blocks */
+code, pre, .expressive-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   Link Styling
+   ============================================ */
+
+a {
+  color: var(--sl-color-accent);
+}
+
+a:hover {
+  color: #8BE9FD; /* Cyan on hover (Dracula) */
+}
+
+:root[data-theme='light'] a:hover {
+  color: #036A96; /* Alucard cyan */
+}
+
+/* ============================================
+   Sidebar Styling
+   ============================================ */
+
+.sidebar-content {
+  background: var(--sl-color-bg-sidebar);
+}
+
+/* Active nav item */
+nav.sidebar a[aria-current="page"] {
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-accent);
+  border-left: 3px solid var(--sl-color-accent);
+}
+
+/* ============================================
+   Code Block Theming
+   ============================================ */
+
+/* Use Dracula theme for code blocks */
+.expressive-code {
+  --ec-brdCol: var(--sl-color-hairline);
+}
+
+/* ============================================
+   Search Styling
+   ============================================ */
+
+.pagefind-ui__search-input {
+  background: var(--sl-color-bg) !important;
+  border-color: var(--sl-color-hairline) !important;
+}
+
+.pagefind-ui__search-input:focus {
+  border-color: var(--sl-color-accent) !important;
+  box-shadow: 0 0 0 2px var(--sl-color-accent-low) !important;
+}
+
+/* ============================================
+   Button Styling
+   ============================================ */
+
+.action.primary {
+  background: #8BE9FD; /* Cyan CTA */
+  color: #282A36;
+  border: none;
+}
+
+.action.primary:hover {
+  background: #50FA7B; /* Green on hover */
+}
+
+:root[data-theme='light'] .action.primary {
+  background: #036A96;
+  color: #FFFBEB;
+}
+
+:root[data-theme='light'] .action.primary:hover {
+  background: #14710A;
+}
+
+/* Secondary/minimal buttons */
+.action.minimal {
+  color: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+}
+
+.action.minimal:hover {
+  background: var(--sl-color-accent-low);
+}
+
+/* ============================================
+   Card Styling
+   ============================================ */
+
+.card {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 6px;
+}
+
+.card:hover {
+  border-color: var(--sl-color-accent);
+}
+
+/* ============================================
+   Table Styling
+   ============================================ */
+
+table {
+  border-color: var(--sl-color-hairline);
+}
+
+th {
+  background: var(--sl-color-gray-6);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: var(--sl-color-gray-6);
+}
+
+/* ============================================
+   Scrollbar Styling (Dark mode)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-gray-5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-gray-4);
+}

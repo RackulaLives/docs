@@ -1,0 +1,132 @@
+---
+title: Import/Export
+description: Save, share, and backup your rack layouts.
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Rackula stores data locally in your browser. Use import/export to backup your work, share with others, or move between devices.
+
+## Export formats
+
+### Images
+
+<Tabs>
+  <TabItem label="PNG">
+    **Best for:** Documentation, sharing, presentations
+
+    - Raster image format
+    - Fixed resolution (configurable)
+    - Universal compatibility
+  </TabItem>
+  <TabItem label="SVG">
+    **Best for:** Scalable graphics, editing, web embedding
+
+    - Vector format
+    - Infinite scaling without quality loss
+    - Editable in Illustrator, Inkscape, etc.
+  </TabItem>
+  <TabItem label="PDF">
+    **Best for:** Printing, formal documentation
+
+    - Print-ready format
+    - Includes metadata
+    - Page size options available
+  </TabItem>
+</Tabs>
+
+### Data
+
+<Tabs>
+  <TabItem label="JSON">
+    **Best for:** Backups, version control, programmatic access
+
+    - Complete rack data
+    - Human-readable format
+    - Can be imported back into Rackula
+  </TabItem>
+</Tabs>
+
+## Exporting
+
+### Export current rack
+
+1. Click **Export** in the toolbar
+2. Select your format
+3. Configure export options (if applicable)
+4. Click **Download**
+
+### Export all racks
+
+1. Click **Export** in the toolbar
+2. Enable **Export All Racks**
+3. Choose format and download
+
+<Aside type="tip">
+  JSON export includes all racks and settings. Use this for complete backups.
+</Aside>
+
+## Importing
+
+### From JSON backup
+
+1. Click **Import** in the toolbar
+2. Select your JSON file
+3. Choose import mode:
+   - **Replace**: Overwrites current project
+   - **Merge**: Adds imported racks to current project
+
+### From URL
+
+Rackula supports loading layouts from URLs. Share a link to your hosted JSON file and others can import directly.
+
+## Data storage
+
+### Browser storage
+
+Rackula stores your data in browser localStorage. This means:
+
+- **Data persists** across browser sessions
+- **Data is local** to your device and browser
+- **Clearing browser data** will delete your layouts
+
+<Aside type="caution">
+  Export regularly to avoid data loss. Browser storage can be cleared by accident.
+</Aside>
+
+### Storage limits
+
+Browser localStorage typically allows 5-10MB. This is sufficient for hundreds of racks with thousands of devices.
+
+## Sharing layouts
+
+### Direct sharing
+
+1. Export your layout as JSON
+2. Share the file via email, Slack, etc.
+3. Recipient imports the JSON file
+
+### Link sharing
+
+Host your exported JSON file (GitHub Gist, Dropbox, etc.) and share the URL. Others can import directly from the URL.
+
+## Version control
+
+For teams, consider storing exports in Git:
+
+```bash
+# Export and commit
+rackula export > homelab-rack.json
+git add homelab-rack.json
+git commit -m "Update rack layout"
+```
+
+This provides:
+- Change history
+- Collaboration via pull requests
+- Rollback capability
+
+## Next steps
+
+- [Self-Hosting](/self-hosting/docker/) — run Rackula on your own infrastructure
+- [Keyboard Shortcuts](/reference/shortcuts/) — speed up your workflow

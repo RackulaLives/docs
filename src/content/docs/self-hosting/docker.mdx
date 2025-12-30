@@ -1,0 +1,176 @@
+---
+title: Docker Deployment
+description: Self-host Rackula using Docker.
+---
+
+import { Tabs, TabItem, Aside, Steps } from '@astrojs/starlight/components';
+
+Run Rackula on your own infrastructure using Docker. No external dependencies required.
+
+## Quick start
+
+```bash
+docker run -d -p 3000:3000 ghcr.io/rackulalives/rackula:latest
+```
+
+Open `http://localhost:3000` in your browser.
+
+## Docker Compose
+
+For production deployments, use Docker Compose:
+
+```yaml title="docker-compose.yml"
+services:
+  rackula:
+    image: ghcr.io/rackulalives/rackula:latest
+    container_name: rackula
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+```
+
+Start the service:
+
+```bash
+docker compose up -d
+```
+
+## Configuration
+
+### Environment variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3000` | HTTP port |
+| `BASE_URL` | `/` | Base URL path for reverse proxy setups |
+
+### Custom port
+
+```bash
+docker run -d -p 8080:3000 ghcr.io/rackulalives/rackula:latest
+```
+
+### Behind a reverse proxy
+
+<Tabs>
+  <TabItem label="Nginx">
+```nginx
+server {
+    listen 443 ssl;
+    server_name rackula.example.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+  </TabItem>
+  <TabItem label="Caddy">
+```caddy
+rackula.example.com {
+    reverse_proxy localhost:3000
+}
+```
+  </TabItem>
+  <TabItem label="Traefik">
+```yaml
+labels:
+  - "traefik.enable=true"
+  - "traefik.http.routers.rackula.rule=Host(`rackula.example.com`)"
+  - "traefik.http.services.rackula.loadbalancer.server.port=3000"
+```
+  </TabItem>
+</Tabs>
+
+## Updating
+
+<Steps>
+
+1. Pull the latest image
+
+   ```bash
+   docker pull ghcr.io/rackulalives/rackula:latest
+   ```
+
+2. Restart the container
+
+   ```bash
+   docker compose down && docker compose up -d
+   ```
+
+</Steps>
+
+## Version pinning
+
+For stability, pin to a specific version:
+
+```yaml title="docker-compose.yml"
+services:
+  rackula:
+    image: ghcr.io/rackulalives/rackula:v1.0.0
+```
+
+Check the [releases page](https://github.com/RackulaLives/Rackula/releases) for available versions.
+
+## Data persistence
+
+<Aside type="note">
+  Rackula stores data in the browser's localStorage. The Docker container is stateless — no server-side data is stored.
+</Aside>
+
+For backup and sharing, use the export feature to save layouts as JSON files.
+
+## Health checks
+
+The container exposes a health endpoint:
+
+```bash
+curl http://localhost:3000/health
+```
+
+Docker Compose health check:
+
+```yaml
+services:
+  rackula:
+    image: ghcr.io/rackulalives/rackula:latest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+```
+
+## Resource requirements
+
+| Resource | Minimum | Recommended |
+|----------|---------|-------------|
+| CPU | 0.1 cores | 0.5 cores |
+| Memory | 64MB | 128MB |
+| Disk | 100MB | 200MB |
+
+Rackula is a lightweight static application with minimal resource requirements.
+
+## Troubleshooting
+
+### Container won't start
+
+Check logs:
+
+```bash
+docker logs rackula
+```
+
+### Port already in use
+
+Change the host port:
+
+```bash
+docker run -d -p 8080:3000 ghcr.io/rackulalives/rackula:latest
+```
+
+### Reverse proxy issues
+
+Ensure your proxy passes the correct headers. Check `Host`, `X-Real-IP`, and `X-Forwarded-Proto`.
