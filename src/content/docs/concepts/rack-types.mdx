@@ -1,0 +1,172 @@
+---
+title: Rack Types
+description: Different server rack form factors and when to use each type.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Server racks come in various form factors, each suited to different environments and equipment. Understanding these types helps you plan layouts that match your physical infrastructure.
+
+## Form factors
+
+Rackula supports five rack form factors:
+
+### 2-Post Rack
+
+A simple frame with two vertical posts.
+
+| Aspect | Details |
+|--------|---------|
+| **Structure** | Two vertical rails |
+| **Best for** | Networking equipment, patch panels |
+| **Depth** | Shallow (no rear support) |
+| **Cost** | Lowest |
+
+**Typical use:** Telecom closets, network distribution points.
+
+<Aside type="caution">
+  2-post racks cannot support heavy servers. Use 4-post racks for compute equipment.
+</Aside>
+
+### 4-Post Rack
+
+The standard server rack with front and rear mounting rails.
+
+| Aspect | Details |
+|--------|---------|
+| **Structure** | Four vertical rails (front and rear) |
+| **Best for** | Servers, storage arrays |
+| **Depth** | Full depth (adjustable) |
+| **Cost** | Moderate |
+
+**Typical use:** Data centres, server rooms, homelabs.
+
+### 4-Post Cabinet
+
+A 4-post rack enclosed in a cabinet with doors and side panels.
+
+| Aspect | Details |
+|--------|---------|
+| **Structure** | Enclosed 4-post frame |
+| **Best for** | Office environments, security |
+| **Features** | Lockable doors, cable management |
+| **Cost** | Higher |
+
+**Typical use:** Offices, retail locations, anywhere physical security matters.
+
+### Wall-Mount Rack
+
+A rack designed to mount directly to a wall.
+
+| Aspect | Details |
+|--------|---------|
+| **Structure** | Wall-mounted frame |
+| **Height** | Usually 6U–18U |
+| **Depth** | Shallow to medium |
+| **Best for** | Small installations, network closets |
+
+**Typical use:** Small offices, home network equipment.
+
+<Aside>
+  Wall-mount racks often swing open for rear access. Account for this clearance when planning.
+</Aside>
+
+### Open Frame
+
+A 4-post rack without side panels or enclosure.
+
+| Aspect | Details |
+|--------|---------|
+| **Structure** | Open 4-post frame |
+| **Best for** | Airflow, easy access |
+| **Features** | Maximum cooling, visible equipment |
+| **Cost** | Lower than cabinets |
+
+**Typical use:** Data centres with hot/cold aisle containment, labs.
+
+## Rack widths
+
+### 19-inch (standard)
+
+The vast majority of rack-mount equipment uses the 19-inch standard:
+- **External width:** 19 inches (482.6mm)
+- **Mounting width:** 17.75 inches (450.85mm) between rails
+
+### 23-inch (telco)
+
+Used primarily in telecommunications:
+- **External width:** 23 inches (584.2mm)
+- Less common in IT environments
+
+### 10-inch (half-width)
+
+Used for small installations:
+- **External width:** 10 inches (254mm)
+- Common for home network equipment
+
+<Aside type="tip">
+  Most homelab equipment uses 19-inch racks. Only select 23-inch or 10-inch if you have specific equipment requirements.
+</Aside>
+
+## Rack depths
+
+Rack depth determines what equipment can fit:
+
+| Depth | Range | Suitable for |
+|-------|-------|--------------|
+| Shallow | 12"–18" | Network switches, patch panels |
+| Medium | 24"–30" | 1U servers, some storage |
+| Deep | 36"–42" | Full-size servers, storage arrays |
+| Extra deep | 44"–48" | High-density servers |
+
+<Aside type="caution">
+  Always check equipment depth before purchasing a rack. Deep servers in shallow racks won't fit.
+</Aside>
+
+## Choosing a rack type
+
+<Tabs>
+  <TabItem label="Homelab">
+    **Recommended:** 4-post rack or open frame (12U–42U)
+
+    - Open frame for maximum cooling
+    - 4-post for stability
+    - Consider noise if rack is in living space
+    - Wall-mount for small setups (networking only)
+  </TabItem>
+  <TabItem label="Office">
+    **Recommended:** 4-post cabinet (25U–42U)
+
+    - Enclosed for noise reduction
+    - Lockable for security
+    - Cable management options
+    - Consider ventilation requirements
+  </TabItem>
+  <TabItem label="Data Centre">
+    **Recommended:** 4-post rack or open frame (42U–48U)
+
+    - Standardise on one type
+    - Hot/cold aisle compatibility
+    - Cable management trays
+    - PDU mounting positions
+  </TabItem>
+</Tabs>
+
+## In Rackula
+
+Configure your rack type when creating a new rack:
+
+1. Click **New Rack**
+2. Select **Form Factor** from the dropdown
+3. Rackula adapts the visual representation
+
+The form factor affects:
+- Visual appearance in the rack view
+- Available mounting options
+- Default width setting
+
+## Related concepts
+
+- [Rack Units](/concepts/rack-units/) — Understanding U measurements
+- [Airflow](/concepts/airflow/) — Cooling considerations for rack types
+- [Rack Configuration](/guides/racks/) — Configure racks in Rackula

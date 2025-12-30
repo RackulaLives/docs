@@ -1,0 +1,228 @@
+---
+title: Airflow & Cooling
+description: Thermal management concepts and best practices for rack layouts.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Proper airflow management is critical for equipment longevity and performance. Understanding cooling patterns helps you design racks that run efficiently and reliably.
+
+## Why airflow matters
+
+Poor thermal management leads to:
+- **Reduced performance** — CPUs throttle when overheated
+- **Equipment failure** — Heat degrades components faster
+- **Increased energy costs** — Cooling systems work harder
+- **Noise** — Fans spin faster to compensate
+
+## Airflow directions
+
+Rackula supports seven airflow configurations:
+
+### Front-to-rear (most common)
+
+```
+FRONT                    REAR
+  ┌──────────────────────┐
+→ │  ████████████████  → │ →
+  └──────────────────────┘
+Cool air in            Hot air out
+```
+
+**Used by:** Most servers, storage arrays, compute equipment
+
+This is the standard for enterprise equipment. Cold air enters the front, passes over components, and hot air exhausts from the rear.
+
+### Rear-to-front
+
+```
+FRONT                    REAR
+  ┌──────────────────────┐
+← │  ████████████████  ← │ ←
+  └──────────────────────┘
+Hot air out            Cool air in
+```
+
+**Used by:** Some network switches, specialty equipment
+
+Less common. Check your equipment specifications.
+
+<Aside type="caution">
+  Mixing front-to-rear and rear-to-front equipment in the same rack causes airflow conflicts. Rackula highlights these conflicts when you enable airflow visualisation.
+</Aside>
+
+### Side-to-rear
+
+```
+FRONT                    REAR
+  ┌──────────────────────┐
+  │ ↓                  → │ →
+  │ █████████████████    │
+  └──────────────────────┘
+Cool from side       Hot out rear
+```
+
+**Used by:** Some 1U switches, small appliances
+
+Air enters from the side and exhausts to the rear.
+
+### Left-to-right / Right-to-left
+
+```
+  ┌──────────────────────┐
+→ │                    → │
+  │ ████████████████████ │
+← │                    ← │
+  └──────────────────────┘
+```
+
+**Used by:** Some specialised equipment
+
+Less common in IT equipment. Check manufacturer specifications.
+
+### Mixed
+
+Equipment with multiple airflow paths or complex internal routing.
+
+### Passive
+
+No active cooling—relies on ambient airflow and convection.
+
+**Used by:** Patch panels, PDUs, passive shelves
+
+## Hot aisle / cold aisle
+
+The hot aisle/cold aisle layout is the standard for data centre thermal management.
+
+<Tabs>
+  <TabItem label="Layout">
+    ```
+    ┌─────────┐ HOT  ┌─────────┐
+    │ Rack A  │ AISLE│ Rack B  │
+    │ ← → ← → │      │ ← → ← → │
+    │ exhaust │      │ exhaust │
+    └─────────┘      └─────────┘
+
+    ┌─────────┐ COLD ┌─────────┐
+    │ Rack C  │ AISLE│ Rack D  │
+    │ → ← → ← │      │ → ← → ← │
+    │ intake  │      │ intake  │
+    └─────────┘      └─────────┘
+    ```
+
+    - **Cold aisle:** Rack fronts face each other
+    - **Hot aisle:** Rack rears face each other
+    - Cooling delivers air to cold aisles
+    - Hot aisles return air to cooling systems
+  </TabItem>
+  <TabItem label="Benefits">
+    - **Efficiency:** Cool and hot air don't mix
+    - **Capacity:** More equipment per cooling unit
+    - **Predictability:** Consistent temperatures
+    - **Containment:** Can add doors/curtains
+  </TabItem>
+  <TabItem label="Homelab">
+    Even in a single rack, follow the principle:
+
+    - Keep intake (front) clear of obstructions
+    - Exhaust (rear) should have clearance
+    - Don't place rack against a wall on exhaust side
+    - Consider room airflow when positioning
+  </TabItem>
+</Tabs>
+
+## Blanking panels
+
+Empty U spaces create problems:
+
+```
+Without blanking panels:
+┌──────────────────────┐
+│ Server (exhaust) →   │
+│ ═══════════════ EMPTY│ ← Hot air recirculates!
+│ Server (exhaust) →   │
+└──────────────────────┘
+```
+
+Hot exhaust air takes the path of least resistance—through empty spaces—and returns to equipment intakes.
+
+**Solution:** Fill all empty U spaces with blanking panels.
+
+```
+With blanking panels:
+┌──────────────────────┐
+│ Server (exhaust) →   │
+│ Blanking panel ████  │ ← Barrier forces air out
+│ Server (exhaust) →   │
+└──────────────────────┘
+```
+
+<Aside type="tip">
+  In Rackula, add blanking panels from the **Blank** category in the device library. They help you visualise complete rack layouts.
+</Aside>
+
+## Airflow visualisation in Rackula
+
+Rackula can display airflow indicators on devices:
+
+1. Press **A** or click the airflow button in the toolbar
+2. Edge stripes show airflow direction for each device
+3. Arrows indicate flow patterns
+4. Conflicts are highlighted with orange borders
+
+### Airflow conflict detection
+
+When devices with incompatible airflow are adjacent, Rackula highlights the conflict:
+
+| Conflict | Problem |
+|----------|---------|
+| Front-to-rear above rear-to-front | Hot air feeds into intake |
+| Side intake blocked | Insufficient cooling |
+| Opposing exhaust directions | Turbulence, reduced efficiency |
+
+## Setting device airflow
+
+When creating or editing devices:
+
+1. Open the edit panel
+2. Find the **Airflow** setting
+3. Select the appropriate direction:
+   - Passive
+   - Front-to-rear
+   - Rear-to-front
+   - Left-to-right
+   - Right-to-left
+   - Side-to-rear
+   - Mixed
+
+<Aside>
+  Check your equipment manuals for airflow specifications. Don't assume—some devices have unconventional cooling.
+</Aside>
+
+## Best practices
+
+### Rack layout
+
+1. **Group similar airflow** — Keep front-to-rear devices together
+2. **Use blanking panels** — Fill every empty U
+3. **Heavy at bottom** — UPS and dense storage at the base
+4. **Network at top** — Easier cable runs, often rear-to-front
+5. **Leave clearance** — 3–6" at front and rear for airflow
+
+### Cable management
+
+- **Don't block intakes** — Route cables around, not over, device fronts
+- **Use cable managers** — Keep cables organised and out of airflow paths
+- **Rear cable routing** — Most cables should exit through the rear
+
+### Room considerations
+
+- **Face cold aisle to AC** — If possible, point rack fronts toward cooling
+- **Avoid enclosed spaces** — Ensure hot air can escape
+- **Monitor temperatures** — Track inlet temps to catch problems early
+
+## Related concepts
+
+- [Device Categories](/concepts/device-categories/) — Category affects default airflow
+- [Rack Types](/concepts/rack-types/) — Open frames vs. cabinets
+- [Device Management](/guides/devices/) — Setting airflow per device
