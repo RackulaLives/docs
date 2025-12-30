@@ -1,0 +1,203 @@
+---
+title: Device Categories
+description: How Rackula classifies and organises rack-mount equipment.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Rackula organises devices into **12 categories** to help you visualise and document your rack layouts. Each category has a default colour for quick identification.
+
+## Active categories
+
+These categories represent equipment that actively processes, stores, or distributes data and power.
+
+### Server
+
+**Colour:** Cyan (`#8BE9FD`)
+
+Compute equipment including:
+- Rack-mount servers (1U, 2U, 4U)
+- Blade chassis
+- Hypervisors and virtualisation hosts
+- GPU compute nodes
+
+### Network
+
+**Colour:** Purple (`#BD93F9`)
+
+Networking infrastructure:
+- Ethernet switches
+- Routers and firewalls
+- Load balancers
+- Wireless access point controllers
+
+### Storage
+
+**Colour:** Green (`#50FA7B`)
+
+Data storage systems:
+- NAS (Network Attached Storage)
+- SAN (Storage Area Network)
+- Disk shelves and JBODs
+- Tape libraries
+
+### Power
+
+**Colour:** Red (`#FF5555`)
+
+Power distribution and protection:
+- PDU (Power Distribution Unit)
+- UPS (Uninterruptible Power Supply)
+- ATS (Automatic Transfer Switch)
+- Power meters
+
+<Aside type="caution">
+  Power equipment is highlighted in red to draw attention—these are critical infrastructure components.
+</Aside>
+
+### KVM
+
+**Colour:** Orange (`#FFB86C`)
+
+Console and remote access:
+- KVM switches
+- Console servers
+- Serial concentrators
+- IP-based remote access
+
+### AV/Media
+
+**Colour:** Pink (`#FF79C6`)
+
+Audio, video, and media equipment:
+- Media servers
+- Video encoders/decoders
+- Audio processors
+- Streaming equipment
+
+### Cooling
+
+**Colour:** Yellow (`#F1FA8C`)
+
+Environmental control:
+- Rack-mount fans
+- In-row cooling units
+- Environmental monitors
+- Temperature sensors
+
+## Passive categories
+
+These categories represent equipment that doesn't actively process data but serves important infrastructure functions.
+
+### Patch Panel
+
+**Colour:** Grey (`#6272A4`)
+
+Cable termination:
+- Copper patch panels
+- Fibre patch panels
+- Cable management bars
+
+### Shelf
+
+**Colour:** Grey (`#6272A4`)
+
+Non-rack-mount equipment support:
+- Keyboard/mouse trays
+- Equipment shelves
+- Monitor shelves
+- Sliding shelves
+
+### Blank
+
+**Colour:** Dark grey (`#44475A`)
+
+Space fillers:
+- Blanking panels
+- Filler panels
+- Vent panels
+
+<Aside type="tip">
+  Use blanking panels to fill empty U spaces. This prevents hot air recirculation and improves cooling efficiency.
+</Aside>
+
+### Cable Management
+
+**Colour:** Grey (`#6272A4`)
+
+Cable organisation:
+- Vertical cable managers
+- Horizontal cable organisers
+- Cable rings and hooks
+- Cable ducts
+
+### Other
+
+**Colour:** Grey (`#6272A4`)
+
+Anything that doesn't fit other categories:
+- Custom equipment
+- Unusual form factors
+- Specialty devices
+
+## Category colours in Rackula
+
+### Default colours
+
+Rackula assigns colours automatically based on category. The colour scheme uses the Dracula palette:
+
+| Category | Dracula (dark) | Alucard (light) |
+|----------|----------------|-----------------|
+| Server | `#8BE9FD` | `#036A96` |
+| Network | `#BD93F9` | `#644AC9` |
+| Storage | `#50FA7B` | `#14710A` |
+| Power | `#FF5555` | `#CB3A2A` |
+| KVM | `#FFB86C` | `#A34D14` |
+| AV/Media | `#FF79C6` | `#A3144D` |
+| Cooling | `#F1FA8C` | `#846E15` |
+| Passive* | `#6272A4` | `#6C664B` |
+
+*Passive categories (Patch Panel, Shelf, Cable Management, Other) share the same muted colour.
+
+### Custom colours
+
+You can override the category colour on individual devices:
+
+1. Select the device
+2. Open the edit panel
+3. Click the colour swatch
+4. Choose a custom colour
+
+Custom colours help distinguish similar equipment (e.g., production vs. development servers).
+
+## Filtering by category
+
+In the device library:
+- Categories appear as collapsible groups
+- Devices are automatically sorted by category
+- Use search to filter across all categories
+
+## Choosing categories
+
+When adding custom devices, choose the category that best describes the **primary function**:
+
+| If the device primarily... | Choose |
+|---------------------------|--------|
+| Runs applications/VMs | Server |
+| Routes/switches network traffic | Network |
+| Stores data | Storage |
+| Distributes/protects power | Power |
+| Provides console access | KVM |
+| Handles audio/video | AV/Media |
+| Manages airflow | Cooling |
+| Terminates cables | Patch Panel |
+| Supports non-rack equipment | Shelf |
+| Fills empty space | Blank |
+| Organises cables | Cable Management |
+| Doesn't fit above | Other |
+
+## Related concepts
+
+- [Device Management](/guides/devices/) — Working with devices in Rackula
+- [Airflow](/concepts/airflow/) — How categories affect cooling
+- [Display Modes](/reference/display-modes/) — Visualising categories

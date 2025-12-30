@@ -1,0 +1,128 @@
+---
+title: Rack Units (U)
+description: Understanding rack units, the standard measurement for server rack equipment.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+A **rack unit** (abbreviated **U** or **RU**) is the standard unit of measurement for the height of equipment designed to mount in a 19-inch server rack.
+
+## What is a rack unit?
+
+One rack unit equals **1.75 inches (44.45mm)** in height. This standard was established by the Electronic Industries Alliance (EIA-310) and is used globally.
+
+| Units | Height (inches) | Height (mm) | Height (cm) |
+|-------|-----------------|-------------|-------------|
+| 1U | 1.75" | 44.45mm | 4.45cm |
+| 2U | 3.5" | 88.9mm | 8.89cm |
+| 3U | 5.25" | 133.35mm | 13.34cm |
+| 4U | 7" | 177.8mm | 17.78cm |
+
+<Aside type="tip">
+  **Quick calculation:** Multiply the U count by 1.75 to get inches, or by 44.45 to get millimetres.
+</Aside>
+
+## Common equipment sizes
+
+| Equipment type | Typical size | Notes |
+|----------------|--------------|-------|
+| 1U server | 1U | Most common server form factor |
+| Standard switch | 1U | Network switches, patch panels |
+| 2U server | 2U | More drive bays, better cooling |
+| 4U server | 4U | High-performance, storage-heavy |
+| UPS | 2U–6U | Varies by capacity |
+| PDU | 0U–2U | Often mounted vertically (0U) |
+
+## U position numbering
+
+Rack positions are numbered sequentially, with each number representing one U of space.
+
+### Bottom-up numbering (most common)
+
+The most widely used convention numbers from the bottom:
+
+```
+┌─────────────┐
+│ U42         │ ← Top of rack
+│ U41         │
+│ ...         │
+│ U2          │
+│ U1          │ ← Bottom of rack
+└─────────────┘
+```
+
+**Advantages:**
+- U1 is always at floor level
+- Consistent reference point regardless of rack height
+- Heavy equipment naturally placed at the bottom
+
+### Top-down numbering
+
+Some data centres number from the top:
+
+```
+┌─────────────┐
+│ U1          │ ← Top of rack
+│ U2          │
+│ ...         │
+│ U41         │
+│ U42         │ ← Bottom of rack
+└─────────────┘
+```
+
+<Aside>
+  Rackula supports both numbering conventions. Configure this in rack settings under **Numbering direction**.
+</Aside>
+
+## Device placement
+
+When placing a multi-U device, the **starting position** is the **lowest U it occupies**.
+
+For example, a 2U server at position U10:
+- Occupies U10 and U11
+- U10 is the "mounting position"
+- U11 is covered by the device
+
+```
+┌─────────────┐
+│ U12         │ (empty)
+│ U11         │ ┐
+│ U10         │ ┘ 2U Server (position: U10)
+│ U9          │ (empty)
+└─────────────┘
+```
+
+## Half-rack units
+
+Some equipment uses **half-rack heights**:
+
+| Size | Height | Examples |
+|------|--------|----------|
+| 0.5U | 0.875" (22.2mm) | Thin switches, KVM |
+| 1.5U | 2.625" (66.7mm) | Some Dell servers |
+
+<Aside type="caution">
+  Half-U devices create gaps that can affect airflow. Use blanking panels or filler panels to maintain proper cooling.
+</Aside>
+
+Rackula supports half-U devices. Set the device height to `0.5`, `1.5`, etc.
+
+## Rack height standards
+
+Common full-rack heights:
+
+| Height | Use case |
+|--------|----------|
+| 42U | Standard data centre rack |
+| 45U | Extended height rack |
+| 48U | Tall data centre rack |
+| 25U | Half-height rack |
+| 22U | Audio/video rack |
+| 12U | Wall-mount rack |
+| 6U | Desktop/portable rack |
+| 4U | Mini rack |
+
+## Related concepts
+
+- [Rack Types](/concepts/rack-types/) — Different rack form factors
+- [Rack Configuration](/guides/racks/) — Configure rack height in Rackula

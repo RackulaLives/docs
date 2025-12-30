@@ -1,0 +1,73 @@
+---
+title: Core Concepts
+description: Essential concepts for understanding rack layouts and Rackula.
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Before diving into Rackula, it helps to understand the fundamental concepts of server rack layouts. This section covers the terminology, standards, and best practices used throughout the application.
+
+## Key concepts
+
+<CardGrid>
+  <LinkCard
+    title="Rack Units (U)"
+    description="The standard unit of measurement for rack equipment."
+    href="/concepts/rack-units/"
+  />
+  <LinkCard
+    title="Rack Types"
+    description="Different rack form factors and when to use them."
+    href="/concepts/rack-types/"
+  />
+  <LinkCard
+    title="Device Categories"
+    description="How equipment is classified and organised."
+    href="/concepts/device-categories/"
+  />
+  <LinkCard
+    title="Airflow & Cooling"
+    description="Thermal management and best practices."
+    href="/concepts/airflow/"
+  />
+</CardGrid>
+
+## Quick reference
+
+### Common rack sizes
+
+| Size | Height | Typical use |
+|------|--------|-------------|
+| 42U | 73.5" (1.87m) | Data centre standard |
+| 25U | 43.75" (1.11m) | Half-height rack |
+| 12U | 21" (53cm) | Wall-mount |
+| 6U | 10.5" (27cm) | Desktop/small |
+
+### Device category colours
+
+Rackula uses consistent colours to identify device types:
+
+| Category | Colour | Examples |
+|----------|--------|----------|
+| Server | Cyan | Compute nodes, hypervisors |
+| Network | Purple | Switches, routers, firewalls |
+| Storage | Green | NAS, SAN, disk shelves |
+| Power | Red | PDU, UPS |
+| KVM | Orange | Console servers |
+| AV/Media | Pink | Media servers |
+| Cooling | Yellow | Fans, AC units |
+
+### Airflow directions
+
+| Direction | Symbol | Description |
+|-----------|--------|-------------|
+| Front-to-rear | → | Standard server airflow |
+| Rear-to-front | ← | Some network equipment |
+| Side-to-rear | ↗ | Some 1U switches |
+| Passive | — | No active cooling |
+
+## Related guides
+
+- [First Rack Walkthrough](/getting-started/first-rack/) — Apply these concepts
+- [Device Management](/guides/devices/) — Work with device categories
+- [Rack Configuration](/guides/racks/) — Configure rack types
