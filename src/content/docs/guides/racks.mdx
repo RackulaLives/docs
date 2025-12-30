@@ -3,82 +3,290 @@ title: Rack Configuration
 description: Configure rack properties, dimensions, and display options.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Racks are containers for your devices. This guide covers rack creation, configuration, and management.
+Racks are containers for your devices. This guide covers rack creation, configuration, and all available settings.
 
 ## Creating a rack
 
-1. Click **New Rack** in the toolbar
-2. Enter a name for your rack
-3. Set the height in rack units (U)
-4. Click **Create**
+<Steps>
 
-### Common rack sizes
+1. **Click "New Rack"**
+
+   Find the New Rack button in the toolbar or use the keyboard shortcut.
+
+2. **Enter a name**
+
+   Give your rack a descriptive name (e.g., "Primary Server Rack", "Network Closet").
+
+3. **Select rack width**
+
+   Choose from standard widths:
+   - **19"** — Standard rack (most common)
+   - **23"** — Telco/data centre rack
+   - **10"** — Small desktop/DeskPi rack
+
+4. **Set the height**
+
+   Pick from presets or enter a custom height (1–100U).
+
+5. **Click "Create"**
+
+   Your new rack appears on the canvas, ready for devices.
+
+</Steps>
+
+<Aside type="tip">
+  The default name "Racky McRackface" is a placeholder — rename it to something meaningful for your setup.
+</Aside>
+
+## Rack sizes
+
+### Standard heights
 
 | Size | Use case |
 |------|----------|
-| 42U | Full-height data centre rack |
-| 25U | Half-height or open frame rack |
-| 12U | Small wall-mount or desktop rack |
-| 4U | Mini rack or portable enclosure |
+| **42U** | Full-height data centre rack |
+| **24U** | Half-height rack, medium deployments |
+| **18U** | Compact rack, small server rooms |
+| **12U** | Wall-mount or small homelab |
+
+### Small form factor (10" racks)
+
+10-inch racks have limited height options to match their smaller form factor:
+
+| Size | Use case |
+|------|----------|
+| **12U** | Desktop homelab rack |
+| **8U** | Network equipment enclosure |
+| **6U** | Small network closet |
+| **4U** | Mini portable enclosure |
+
+### Custom heights
+
+Enter any height from 1U to 100U for non-standard requirements. This is useful for:
+
+- Documenting partial rack allocations
+- Planning custom enclosures
+- Mapping unusual equipment configurations
+
+## Rack widths
+
+<Tabs>
+  <TabItem label="19-inch (Standard)">
+    The most common rack width, used by virtually all IT equipment.
+
+    - **External width:** 19 inches (482.6mm)
+    - **Mounting width:** 17.75 inches (450.85mm) between rails
+    - **Use for:** Servers, storage, networking, most rack-mount equipment
+  </TabItem>
+  <TabItem label="23-inch (Telco)">
+    Used in telecommunications and some older data centres.
+
+    - **External width:** 23 inches (584.2mm)
+    - **Mounting width:** 19 inches between rails
+    - **Use for:** Telco equipment, legacy installations
+  </TabItem>
+  <TabItem label="10-inch (Half-width)">
+    Compact racks for small installations and desktop homelabs.
+
+    - **External width:** 10 inches (254mm)
+    - **Use for:** Network switches, small servers, DeskPi setups
+    - **Height limit:** 4U–12U typically
+  </TabItem>
+</Tabs>
+
+<Aside>
+  Most homelab equipment uses 19-inch racks. Only select 23-inch or 10-inch if you have specific equipment that requires it.
+</Aside>
+
+## Form factors
+
+Rackula supports five rack form factors, matching the [rack types](/concepts/rack-types/) in your physical setup:
+
+| Form Factor | Description |
+|-------------|-------------|
+| **2-Post** | Two vertical rails, no rear support |
+| **4-Post** | Front and rear mounting rails |
+| **4-Post Cabinet** | Enclosed 4-post with doors and panels |
+| **Wall-Mount** | Wall-mounted enclosure |
+| **Open Frame** | Open 4-post without side panels |
+
+The form factor affects the visual representation in Rackula but doesn't restrict device placement.
 
 ## Rack properties
 
 ### Basic settings
 
-| Property | Description |
-|----------|-------------|
-| **Name** | Display label for the rack |
-| **Height** | Total height in rack units |
-| **Starting U** | First U number (usually 1) |
-| **Numbering** | Top-down or bottom-up |
+| Property | Description | Default |
+|----------|-------------|---------|
+| **Name** | Display label for the rack | "Racky McRackface" |
+| **Height** | Total height in rack units | 42U |
+| **Width** | Rail width (10", 19", 23") | 19" |
+| **Form Factor** | Physical rack type | 4-Post Cabinet |
+
+### U numbering
+
+Configure how U positions are numbered:
+
+| Setting | U1 Position | Common use |
+|---------|-------------|------------|
+| **Bottom-up** (default) | Bottom of rack | Most data centres |
+| **Top-down** | Top of rack | Some enterprise standards |
+
+<Aside type="tip">
+  Check your organisation's rack documentation standards. Most homelabs use bottom-up numbering, but some enterprise environments require top-down.
+</Aside>
+
+### Starting unit
+
+The first U number in your rack. Default is 1, but you can change this for:
+
+- **Continuation racks** — Start at 41 if documenting U41–84 of a tall rack
+- **Offset installations** — Match physical labelling on existing equipment
+- **Multi-section documentation** — Split a large rack into separate Rackula racks
 
 ### Display options
 
-| Option | Description |
-|--------|-------------|
-| **Show U numbers** | Display U position labels |
-| **Show grid** | Display grid lines between U positions |
-| **Show device names** | Display device labels in rack view |
+| Option | Description | Default |
+|--------|-------------|---------|
+| **Show rear** | Display rear view on canvas | Enabled |
 
-<Aside type="tip">
-  Most racks number from the bottom up (U1 at the bottom). Some data centres use top-down numbering.
+When "Show rear" is disabled, only the front view appears on the canvas. This is useful for:
+
+- Simplified documentation
+- Focusing on front-facing equipment
+- Smaller canvas when rear placement isn't needed
+
+## Editing rack settings
+
+<Steps>
+
+1. **Select the rack**
+
+   Click on the rack background (not a device) or click the rack name in the tab.
+
+2. **Open the edit panel**
+
+   The properties panel shows rack settings when a rack is selected.
+
+3. **Modify settings**
+
+   Change name, height, numbering, or display options.
+
+4. **Changes apply immediately**
+
+   Updates are saved automatically.
+
+</Steps>
+
+### Changing rack height
+
+You can resize a rack at any time with some constraints:
+
+- **Growing** — Always allowed (add more U positions)
+- **Shrinking** — Blocked if devices would be cut off
+
+<Aside type="caution">
+  If shrinking is blocked, Rackula shows which devices conflict. Move or remove those devices first, then resize.
 </Aside>
+
+**Quick resize buttons** in the edit panel offer common heights (12U, 18U, 24U, 42U) for fast adjustments.
+
+## Rack notes
+
+Add documentation notes to your rack:
+
+1. Select the rack
+2. Find the **Notes** field in the edit panel
+3. Enter relevant information:
+   - Location details
+   - Power specifications
+   - Cooling requirements
+   - Asset information
+
+Notes are saved with your layout and exported with documentation.
 
 ## Multiple racks
 
-Rackula supports multiple racks in a single project. This is useful for:
-
-- Multi-rack deployments
-- Before/after comparisons
-- Planning migrations
-
-### Adding additional racks
-
-Click **New Rack** to add another rack to your project. Each rack is independent and can have different heights and settings.
-
-### Rack arrangement
-
-Drag rack tabs to reorder them in the tab bar. The display order affects how racks appear in exports.
-
-## Renaming and deleting
-
-### Rename
-
-Double-click the rack tab or open rack settings and edit the name.
-
-### Delete
-
-1. Right-click the rack tab
-2. Select **Delete Rack**
-3. Confirm the deletion
-
-<Aside type="caution">
-  Deleting a rack removes all devices in that rack. This cannot be undone.
+<Aside>
+  Multi-rack support is planned for a future version. Currently, Rackula supports one rack per layout.
 </Aside>
 
-## Next steps
+### Current workflow for multiple racks
 
-- [Device Management](/guides/devices/) — add devices to your rack
-- [Import/Export](/guides/export/) — save and share your layouts
+Until multi-rack support arrives, you can:
+
+1. **Create separate layouts** — One layout per rack, exported separately
+2. **Use naming conventions** — "DC1-Row2-Rack4" to identify physical locations
+3. **Export and combine** — Export images and combine in external tools
+
+### Planned features
+
+Future versions will support:
+
+- Multiple racks per layout
+- Rack arrangement and positioning
+- Cross-rack cabling documentation
+- Multi-rack exports
+
+## Deleting a rack
+
+<Steps>
+
+1. **Select the rack**
+
+   Click on the rack background.
+
+2. **Open rack settings**
+
+   Find the delete option in the edit panel.
+
+3. **Confirm deletion**
+
+   Removing a rack also removes all devices in that rack.
+
+</Steps>
+
+<Aside type="caution">
+  In the current single-rack mode, deleting the rack clears all devices. This action cannot be undone — save your work first.
+</Aside>
+
+## Best practices
+
+### Naming conventions
+
+Use consistent naming that includes:
+
+- **Location** — Data centre, room, row
+- **Identifier** — Rack number or position
+- **Purpose** — Function or department
+
+Examples:
+- "DC1-R1-01" (Data Centre 1, Row 1, Rack 01)
+- "Homelab-Primary"
+- "Network-Closet-Building-A"
+
+### Height selection
+
+Choose rack height based on:
+
+1. **Physical rack size** — Match your actual equipment
+2. **Growth planning** — Leave room for expansion
+3. **Documentation scope** — Document what's relevant
+
+### U numbering direction
+
+| Scenario | Recommended |
+|----------|-------------|
+| New homelab | Bottom-up (default) |
+| Matching existing labels | Whatever's on the rack |
+| Enterprise environment | Check your standards |
+| Mixed environment | Pick one and be consistent |
+
+## Related guides
+
+- [Rack Types](/concepts/rack-types/) — Understanding form factors
+- [Rack Units](/concepts/rack-units/) — U measurement basics
+- [Device Management](/guides/devices/) — Add devices to your rack
+- [Import/Export](/guides/export/) — Save and share your layouts
