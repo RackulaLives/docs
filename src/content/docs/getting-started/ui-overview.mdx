@@ -1,0 +1,220 @@
+---
+title: UI Overview
+description: Learn the Rackula interface—toolbar, sidebar, canvas, and panels.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+This guide introduces the main areas of the Rackula interface. Understanding the layout helps you work faster and find features quickly.
+
+{/* TODO: Full UI screenshot with numbered annotations */}
+
+## Main areas
+
+The Rackula interface has four main areas:
+
+| Area | Location | Purpose |
+|------|----------|---------|
+| **Toolbar** | Top | Main controls and actions |
+| **Sidebar** | Left | Device library and navigation |
+| **Canvas** | Centre | Rack display and editing |
+| **Edit panel** | Right (when active) | Device and rack properties |
+
+## Toolbar
+
+The toolbar provides quick access to common actions.
+
+{/* TODO: Annotated toolbar screenshot */}
+
+### Left section
+
+| Button | Action | Shortcut |
+|--------|--------|----------|
+| **Logo** | Return to welcome screen | — |
+| **New Rack** | Create a new rack | — |
+| **Load** | Load a saved layout | Ctrl+O |
+| **Save** | Export current layout | Ctrl+S |
+
+### Centre section
+
+| Button | Action | Shortcut |
+|--------|--------|----------|
+| **Undo** | Undo last action | Ctrl+Z |
+| **Redo** | Redo undone action | Ctrl+Shift+Z |
+| **Front/Rear** | Toggle rack view | — |
+
+### Right section
+
+| Button | Action | Shortcut |
+|--------|--------|----------|
+| **Display mode** | Toggle label/image mode | I |
+| **Airflow** | Show airflow indicators | A |
+| **Zoom controls** | Zoom in/out, fit all | +/−/F |
+| **Share** | Generate share link | — |
+| **Export** | Export to file | Ctrl+E |
+| **Theme** | Toggle dark/light mode | — |
+| **Help** | Show keyboard shortcuts | ? |
+
+## Sidebar
+
+The sidebar contains the device library and rack list.
+
+{/* TODO: Annotated sidebar screenshot */}
+
+### Device library
+
+Browse and search available devices:
+
+1. **Search box** — Filter devices by name
+2. **Category groups** — Devices organised by type
+3. **Device cards** — Drag to add to rack
+
+<Aside type="tip">
+  Type in the search box to quickly find devices. Press Enter to select the first result.
+</Aside>
+
+### Rack tabs
+
+When you have multiple racks, tabs appear at the bottom of the sidebar:
+
+- Click a tab to switch racks
+- Drag tabs to reorder
+- Right-click for options (duplicate, delete)
+
+## Canvas
+
+The canvas is the main working area where your rack appears.
+
+{/* TODO: Annotated canvas screenshot */}
+
+### Rack display
+
+| Element | Description |
+|---------|-------------|
+| **U numbers** | Position labels along the sides |
+| **Devices** | Placed equipment in the rack |
+| **Grid lines** | Visual guides for U positions |
+| **5U markers** | Every 5th U is highlighted |
+
+### Interacting with devices
+
+| Action | How to |
+|--------|--------|
+| **Select** | Click a device |
+| **Multi-select** | Shift+click additional devices |
+| **Move** | Drag selected device, or use ↑/↓ keys |
+| **Edit** | Double-click, or select and press Enter |
+| **Delete** | Select and press Delete |
+
+### Zoom and pan
+
+| Action | How to |
+|--------|--------|
+| **Zoom in** | Click +, or Ctrl++ |
+| **Zoom out** | Click −, or Ctrl+− |
+| **Fit all** | Click fit button, or press F |
+| **Pan** | Drag empty canvas area |
+| **Reset zoom** | Click zoom percentage, select 100% |
+
+<Aside>
+  Zoom range is 50% to 200%. The current zoom level appears in the toolbar.
+</Aside>
+
+## Edit panel
+
+The edit panel appears on the right when you select a device or edit rack properties.
+
+{/* TODO: Annotated edit panel screenshot */}
+
+### Device properties
+
+| Section | Fields |
+|---------|--------|
+| **Basic** | Name, category, notes |
+| **Physical** | U height, weight, full-depth |
+| **Appearance** | Colour, custom images |
+| **Advanced** | Airflow, power, network ports |
+
+### Rack properties
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Display label for the rack |
+| **Height** | Total U height (1–100) |
+| **Width** | 10", 19", or 23" |
+| **Form factor** | 2-post, 4-post, cabinet, etc. |
+| **Numbering** | Ascending or descending U order |
+
+## Display modes
+
+Rackula offers three display modes. Toggle with the **I** key or toolbar button.
+
+<Tabs>
+  <TabItem label="Labels">
+    Devices show their names as text. Best for documentation and clarity.
+
+    - Clear device identification
+    - Compact display
+    - Works at all zoom levels
+  </TabItem>
+  <TabItem label="Images">
+    Devices show their images only. Best for realistic visualisation.
+
+    - Manufacturer device images
+    - Front and rear views
+    - Placeholder for devices without images
+  </TabItem>
+  <TabItem label="Image + Labels">
+    Devices show images with name overlay. Best of both worlds.
+
+    - Visual identification
+    - Name labelling
+    - Good for presentations
+  </TabItem>
+</Tabs>
+
+## Themes
+
+Rackula supports dark and light themes.
+
+| Theme | Description |
+|-------|-------------|
+| **Dracula** (dark) | Default. Purple accents on dark background. |
+| **Alucard** (light) | Warm cream background with purple accents. |
+
+Toggle themes using the moon/sun icon in the toolbar. Your preference is saved.
+
+## Keyboard shortcuts
+
+Press **?** to see all keyboard shortcuts. Key shortcuts include:
+
+| Shortcut | Action |
+|----------|--------|
+| Ctrl+Z | Undo |
+| Ctrl+Shift+Z | Redo |
+| Delete | Delete selected |
+| I | Toggle display mode |
+| A | Toggle airflow |
+| F | Fit all |
+| ? | Show help |
+
+See [Keyboard Shortcuts](/reference/shortcuts/) for the complete reference.
+
+## Mobile experience
+
+Rackula works on tablets but is optimised for desktop use. On smaller screens:
+
+- Sidebar becomes a drawer (tap hamburger menu)
+- Touch and drag to position devices
+- Long-press for context menus
+- Pinch to zoom on touch devices
+
+<Aside type="caution">
+  For the best experience, use a device with at least a 1024px wide screen. Phones are not recommended for rack editing.
+</Aside>
+
+## Next steps
+
+- [First Rack Walkthrough](/getting-started/first-rack/) — Create your first layout
+- [Device Management](/guides/devices/) — Customise devices in detail
+- [Keyboard Shortcuts](/reference/shortcuts/) — Full shortcut reference
