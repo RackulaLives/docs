@@ -18,23 +18,23 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Getting Started',
-					autogenerate: { directory: 'getting-started' },
+					items: [{ autogenerate: { directory: 'getting-started' } }],
 				},
 				{
 					label: 'Core Concepts',
-					autogenerate: { directory: 'concepts' },
+					items: [{ autogenerate: { directory: 'concepts' } }],
 				},
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 				{
 					label: 'Self-Hosting',
-					autogenerate: { directory: 'self-hosting' },
+					items: [{ autogenerate: { directory: 'self-hosting' } }],
 				},
 			],
 			customCss: ['./src/styles/dracula.css'],
