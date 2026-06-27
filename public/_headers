@@ -1,0 +1,15 @@
+# Cloudflare Workers static-assets response headers.
+# https://developers.cloudflare.com/workers/static-assets/headers/
+# Astro copies public/ verbatim into dist/, where Workers parses this file
+# (it is not itself served as an asset).
+#
+# Conservative, theme-safe hardening only. A full enforcing Content-Security-
+# Policy (script-src/style-src/font-src) is intentionally omitted — it needs
+# testing against Starlight's inline styles, Google Fonts, and Pagefind first.
+# HSTS is managed at the Cloudflare zone level (SSL/TLS → Edge Certificates),
+# not here, so Cloudflare can handle the preload commitment safely.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'

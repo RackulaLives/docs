@@ -13,6 +13,10 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Least privilege: the job only checks out code and deploys via Cloudflare
+    # secrets — it never needs to write to the repo with GITHUB_TOKEN.
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
