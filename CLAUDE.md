@@ -12,7 +12,7 @@ Documentation site for Rackula — a FOSS rack layout designer for homelabbers.
 
 ## Stack
 
-- Astro 5.x with Starlight
+- Astro 7.x with Starlight
 - Custom CSS for Dracula/Alucard theming
 - Pagefind for search
 
@@ -36,6 +36,7 @@ public/             # Static assets (favicon)
 npm run dev      # Start dev server
 npm run build    # Production build
 npm run preview  # Preview production build
+npm run deploy   # Build + deploy to Cloudflare Workers (wrangler)
 ```
 
 ## Content Guidelines
@@ -122,8 +123,18 @@ Content here...
 
 ## Deployment
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) deploys to self-hosted runner on push to main:
+Hosted on **Cloudflare Workers** as a static-assets site (the built `dist/` is served
+from Cloudflare's edge — no SSR adapter). Config lives in `wrangler.jsonc`, which binds
+the Worker to `docs.racku.la` via a `custom_domain` route.
+
+GitHub Actions workflow (`.github/workflows/deploy.yml`) deploys on push to main:
 
 ```
-npm ci → npm run build → rsync to /var/www/docs.racku.la/
+npm ci → npm run build → cloudflare/wrangler-action (wrangler deploy)
 ```
+
+Requires two repo secrets: `CLOUDFLARE_API_TOKEN` (scoped for **Workers Scripts: Edit**
+plus **Zone: DNS Edit / Workers Routes** for the custom domain) and `CLOUDFLARE_ACCOUNT_ID`.
+
+Local deploy: `npm run deploy` (needs `wrangler` from devDependencies; set
+`CLOUDFLARE_ACCOUNT_ID` if your token spans multiple accounts).
