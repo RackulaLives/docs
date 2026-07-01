@@ -1,0 +1,15 @@
+---
+/**
+ * ThemeProvider override — dark-only site.
+ *
+ * Replaces Starlight's default provider (which reads system preference /
+ * localStorage). We force the Dracula dark theme unconditionally and stub the
+ * picker hook so nothing errors now that the theme switcher is removed.
+ */
+---
+
+{/* Inlined to avoid FOUC. */}
+<script is:inline>
+	document.documentElement.dataset.theme = 'dark';
+	window.StarlightThemeProvider = { updatePickers() {} };
+</script>
