@@ -110,11 +110,60 @@ a:hover {
   background: var(--sl-color-bg-sidebar);
 }
 
-/* Active nav item */
+/* Section group labels (Start / Build layouts / Reference / Deploy) read as
+   a deliberate product map: small-caps mono in neutral grey, not purple. */
+.sidebar details > summary .group-label .large {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+}
+
+/* Active nav item — purple brand emphasis, obvious against the dark pane. */
 nav.sidebar a[aria-current="page"] {
   background: var(--sl-color-accent-low);
   color: var(--sl-color-accent);
   border-left: 3px solid var(--sl-color-accent);
+  border-radius: 0 4px 4px 0;
+  font-weight: 600;
+}
+
+/* Wayfinding on inactive nav links — cyan, never purple, so the active
+   (purple) state stays unambiguous. */
+nav.sidebar a:not([aria-current="page"]):hover {
+  color: var(--sl-color-blue);
+  background: rgba(139, 233, 253, 0.08);
+  border-left: 3px solid var(--sl-color-blue);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Prevent long labels from overflowing or clipping on narrow desktop panes
+   and mobile. */
+nav.sidebar a {
+  overflow-wrap: anywhere;
+}
+
+/* Keyboard focus wayfinding — cyan ring, never purple, so the purple
+   active state stays unambiguous and keyboard users get a visible focus
+   target matching the hover treatment. */
+nav.sidebar a:focus-visible,
+.sl-link-button:focus-visible,
+.sl-link-card:focus-visible,
+.right-sidebar-panel a:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Subtle divider between sidebar groups reinforces the four-section map
+   (Start / Build layouts / Reference / Deploy) without adding visual noise
+   to the first group. */
+.sidebar details + details {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sl-color-hairline-light);
 }
 
 /* ============================================
@@ -135,9 +184,10 @@ nav.sidebar a[aria-current="page"] {
   border-color: var(--sl-color-hairline) !important;
 }
 
+/* Search is a core workflow — cyan wayfinding, not purple. */
 .pagefind-ui__search-input:focus {
-  border-color: var(--sl-color-accent) !important;
-  box-shadow: 0 0 0 2px var(--sl-color-accent-low) !important;
+  border-color: var(--sl-color-blue) !important;
+  box-shadow: 0 0 0 2px rgba(139, 233, 253, 0.25) !important;
 }
 
 /* ============================================
@@ -217,4 +267,84 @@ tr:nth-child(even) {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--sl-color-gray-4);
+}
+
+/* ============================================
+   Right "On this page" outline
+   Acts as a local outline — neutral by default, cyan when active, so it
+   does not compete with the purple left-nav active state.
+   ============================================ */
+
+.right-sidebar-panel a {
+  color: var(--sl-color-gray-3);
+  border-left: 2px solid transparent;
+}
+
+.right-sidebar-panel a:hover {
+  color: var(--sl-color-text);
+}
+
+.right-sidebar-panel a[aria-current="true"] {
+  color: var(--sl-color-blue);
+  border-left-color: var(--sl-color-blue);
+  font-weight: 500;
+}
+
+.right-sidebar-panel a > span {
+  overflow-wrap: anywhere;
+}
+
+/* ============================================
+   Cards — compact product-manual feel
+   ============================================ */
+
+.sl-link-card,
+.card {
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+}
+
+.sl-link-card:hover {
+  border-color: var(--sl-color-blue);
+  box-shadow: 0 0 0 1px rgba(139, 233, 253, 0.2);
+}
+
+.sl-link-card .title,
+.card .title {
+  overflow-wrap: anywhere;
+}
+
+/* ============================================
+   Callouts — reinforce semantic colour by intent
+   Starlight already tints these; add a crisp left rail and mono titles.
+   ============================================ */
+
+.starlight-aside {
+  border-inline-start: 3px solid var(--sl-color-gray-4);
+  border-radius: 6px;
+}
+
+.starlight-aside--note { border-inline-start-color: var(--sl-color-blue); }
+.starlight-aside--tip { border-inline-start-color: var(--sl-color-green); }
+.starlight-aside--caution { border-inline-start-color: var(--sl-color-orange); }
+.starlight-aside--danger { border-inline-start-color: var(--sl-color-red); }
+
+.starlight-aside__title {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   Overflow safety — keep long tokens/labels inside their containers
+   ============================================ */
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
+.sl-markdown-content p,
+.sl-markdown-content td,
+.sl-markdown-content th {
+  overflow-wrap: anywhere;
+}
+
+.sl-markdown-content pre {
+  white-space: pre-wrap;
+  word-break: break-word;
 }
