@@ -28,11 +28,15 @@ export default defineConfig({
 			// docs/superpowers/specs/2026-07-04-starlight-docs-refit-design.md).
 			// Manual items keep labels, order, and grouping deliberate instead of
 			// autogenerating loose directory sections. URLs are unchanged — only
-			// visible labels and grouping move. Deploy currently lists only the
-			// existing Docker page; LXC / Proxmox Community Scripts / TrueNAS
-			// Marketplace / Unraid entries are added as those pages land (#23, #24,
-			// #28, #31). Do not link to deploy pages that do not exist yet.
+			// visible labels and grouping move. Airflow and Device brand packs were
+			// removed: neither is a feature in Rackula today. Deploy currently lists
+			// only the existing Docker page; LXC / Proxmox Community Scripts /
+			// TrueNAS Marketplace / Unraid entries are added as those pages land
+			// (#23, #24, #28, #31). Do not link to deploy pages that do not exist yet.
 			sidebar: [
+				// Home sits above the four task-first groups as the docs root,
+				// so users can always get back to the launchpad from the sidebar.
+				{ label: 'Home', link: '/' },
 				{
 					label: 'Start',
 					items: [
@@ -46,7 +50,6 @@ export default defineConfig({
 					items: [
 						{ label: 'Racks', link: '/guides/racks/' },
 						{ label: 'Devices', link: '/guides/devices/' },
-						{ label: 'Airflow and spacing', link: '/concepts/airflow/' },
 						{ label: 'Import and export', link: '/guides/export/' },
 					],
 				},
@@ -54,7 +57,6 @@ export default defineConfig({
 					label: 'Reference',
 					items: [
 						{ label: 'Keyboard shortcuts', link: '/reference/shortcuts/' },
-						{ label: 'Device brand packs', link: '/reference/brand-packs/' },
 						{ label: 'Rack units', link: '/concepts/rack-units/' },
 						{ label: 'Rack types', link: '/concepts/rack-types/' },
 						{ label: 'Device categories', link: '/concepts/device-categories/' },
