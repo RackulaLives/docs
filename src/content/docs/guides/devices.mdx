@@ -101,22 +101,6 @@ The **device face** determines where the device appears in front/rear views:
   Half-depth devices with face set to "Front" or "Rear" allow another half-depth device to occupy the opposite face at the same U position.
 </Aside>
 
-### Airflow
-
-Set the device's airflow direction for thermal planning:
-
-| Direction | Description |
-|-----------|-------------|
-| **Passive** | No active cooling |
-| **Front-to-rear** | Standard server airflow |
-| **Rear-to-front** | Some network equipment |
-| **Left-to-right** | Side intake |
-| **Right-to-left** | Side intake (opposite) |
-| **Side-to-rear** | Some 1U switches |
-| **Mixed** | Complex internal airflow |
-
-See [Airflow & Cooling](/concepts/airflow/) for thermal management guidance.
-
 ## Advanced device metadata
 
 For detailed documentation, Rackula supports advanced device metadata.
@@ -218,10 +202,6 @@ Track internal components:
 </Aside>
 
 ## Device images
-
-### Bundled images
-
-Rackula includes images for many devices in brand packs. These show automatically when you use devices from brand packs.
 
 ### Custom images per device type
 
@@ -362,6 +342,5 @@ Undoable operations include:
 ## Related guides
 
 - [Device Categories](/concepts/device-categories/) — Understanding device types
-- [Brand Device Packs](/reference/brand-packs/) — Pre-configured device templates
 - [Rack Configuration](/guides/racks/) — Configure rack properties
 - [Import/Export](/guides/export/) — Share and backup layouts
