@@ -55,8 +55,14 @@ The sidebar should be manually ordered around user intent:
    - Brand packs
 4. Deploy
    - Self-host with Docker
+   - LXC
+   - Proxmox Community Scripts
+   - TrueNAS Marketplace
+   - Unraid (planned; not yet available)
 
-The current "Self-Hosting" section should be renamed to "Deploy" in navigation. The page path can remain under `self-hosting/` unless a redirect plan is added later.
+The current "Self-Hosting" section should be renamed to "Deploy" in navigation. The section should make deployment targets visible as first-class paths instead of treating Docker as the only self-hosting route. The page path can remain under `self-hosting/` unless a redirect plan is added later.
+
+Unraid should be represented as planned or "not yet available" rather than as a usable install path. It can appear in the Deploy section if the page clearly sets expectations and points users to Docker, LXC, Proxmox Community Scripts, or TrueNAS Marketplace options until Unraid support exists.
 
 ## Navigation Behaviour
 
@@ -127,6 +133,7 @@ Rename and reorganise visible navigation labels:
 - "Getting Started" becomes "Start".
 - "Guides" becomes "Build layouts".
 - "Self-Hosting" becomes "Deploy".
+- "Deploy" contains Docker, LXC, Proxmox Community Scripts, TrueNAS Marketplace, and Unraid as a planned/not yet available target.
 - "Core Concepts" content moves into the user path where practical, with concept pages retained only when they are valuable standalone references.
 
 Update homepage link cards and guide intros to match those section names.
@@ -146,10 +153,11 @@ The third risk is making the sidebar denser but less usable on mobile. Mitigatio
 Implementation should be verified with:
 
 - `npm run build`
-- Browser review of the homepage, quick start, a long guide page, and the Docker deployment page.
+- Browser review of the homepage, quick start, a long guide page, the Docker deployment page, and the Deploy section list.
 - Desktop and mobile viewport checks.
 - Specific checks that:
   - the left sidebar shows Start, Build layouts, Reference, and Deploy;
+  - Deploy includes Docker, LXC, Proxmox Community Scripts, TrueNAS Marketplace, and an explicitly unavailable/planned Unraid entry;
   - active sidebar state is visible;
   - the right page outline still works on long pages;
   - homepage paths are visible without excessive scrolling;
