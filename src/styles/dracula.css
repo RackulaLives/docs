@@ -334,6 +334,17 @@ tr:nth-child(even) {
 }
 
 /* ============================================
+   Homepage (splash) — hide the auto-generated "Next" pagination.
+   The homepage is a launchpad with its own entry points, so the
+   default next-page link to Quick start is redundant. Scoped to the
+   splash template via data-has-hero, which only the homepage sets.
+   ============================================ */
+
+html[data-has-hero] .pagination-links {
+  display: none;
+}
+
+/* ============================================
    Overflow safety — keep long tokens/labels inside their containers
    ============================================ */
 
